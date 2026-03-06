@@ -16,7 +16,7 @@ public class Sesion {
 
     private LocalTime hora;
 
-    private int plazasDisponibles;
+    private Integer plazasDisponibles;
 
     @ManyToOne
     @JoinColumn(name = "clase_id")
