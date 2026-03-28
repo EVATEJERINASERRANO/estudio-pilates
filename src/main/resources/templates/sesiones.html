@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sesiones</title>
+</head>
+<body>
+
+<h1>Listado de sesiones</h1>
+
+<table border="1">
+    <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Plazas disponibles</th>
+        <th>Acción</th>
+    </tr>
+
+    <!-- Recorremos todas las sesiones -->
+    <tr th:each="sesion : ${sesiones}">
+        <td th:text="${sesion.fecha}"></td>
+        <td th:text="${sesion.hora}"></td>
+        <td th:text="${sesion.plazasDisponibles}"></td>
+
+        <td>
+            <!-- Si hay plazas -->
+            <span th:if="${sesion.plazasDisponibles > 0}">
+                <form action="/reservas" method="post">
+                    <input type="hidden" name="usuarioId" value="1" />
+                    <input type="hidden" name="sesionId" th:value="${sesion.id}" />
+
+                    <button type="submit">Reservar</button>
+                </form>
+            </span>
+
+            <!-- Si no hay plazas -->
+            <span th:if="${sesion.plazasDisponibles == 0}">
+                COMPLETO
+            </span>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

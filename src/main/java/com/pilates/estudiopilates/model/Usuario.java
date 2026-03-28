@@ -1,5 +1,6 @@
 package com.pilates.estudiopilates.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // 👈 Import necesario
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,10 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String email;
 
+    // ⚠️ IMPORTANTE:
+    // Esta anotación evita que la contraseña se envíe en las respuestas JSON.
+    // Se seguirá guardando en la base de datos, pero no se mostrará al cliente.
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -51,6 +56,8 @@ public class Usuario {
         this.email = email;
     }
 
+    // Este getter sigue existiendo para uso interno (login, etc.),
+    // pero gracias a @JsonIgnore no se enviará en JSON
     public String getPassword() {
         return password;
     }

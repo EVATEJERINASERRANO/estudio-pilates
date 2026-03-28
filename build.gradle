@@ -1,44 +1,67 @@
 plugins {
+    // Plugin de Java
     id 'java'
+
+    // Plugin de Spring Boot (framework principal)
     id 'org.springframework.boot' version '4.0.3'
+
+    // Gestión de dependencias automática de Spring
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// Información básica del proyecto
 group = 'com.pilates'
 version = '0.0.1-SNAPSHOT'
 description = 'estudio-pilates'
 
+// Versión de Java que usas
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
+// Configuración para usar Lombok (opcional)
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
 
+// Repositorio donde descarga librerías
 repositories {
     mavenCentral()
 }
 
+// 🔥 DEPENDENCIAS DEL PROYECTO
 dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        //implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.springframework.boot:spring-boot-starter-web'
 
-        compileOnly 'org.projectlombok:lombok'
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        runtimeOnly 'com.mysql:mysql-connector-j'
-        annotationProcessor 'org.projectlombok:lombok'
+    // Spring Web → para crear controladores, APIs, etc.
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.security:spring-security-test'
-        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    }
+    // Spring Data JPA → para trabajar con base de datos
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    // 🔥 Thymeleaf → NECESARIO para HTML (frontend)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Driver de MySQL → conexión con la base de datos
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Lombok → reduce código (getters, setters, etc.)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // DevTools → reinicio automático (solo desarrollo)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // 🔧 TESTS
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Configuración para ejecutar tests con JUnit
 tasks.named('test') {
     useJUnitPlatform()
 }
