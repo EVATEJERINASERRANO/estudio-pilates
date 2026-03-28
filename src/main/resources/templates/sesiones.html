@@ -24,8 +24,8 @@
         <td>
             <!-- Si hay plazas -->
             <span th:if="${sesion.plazasDisponibles > 0}">
-                <form action="/reservas" method="post">
-                    <input type="hidden" name="usuarioId" value="1" />
+               <form action="/reservas/form" method="post">
+                    <input type="hidden" name="usuarioId" value="5" />
                     <input type="hidden" name="sesionId" th:value="${sesion.id}" />
 
                     <button type="submit">Reservar</button>
