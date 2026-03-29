@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coral Pilates Studio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#e8ddd2;
+            color:#4c4036;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* HEADER */
+        header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#eee2d7;
+            border-bottom:1px solid #d5c5b6;
+            box-shadow:0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .navbar{
+            width:95%;
+            max-width:1500px;
+            margin:auto;
+            min-height:110px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:28px;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            flex-shrink:0;
+        }
+
+        .logo img{
+            height:95px;
+            width:auto;
+            object-fit:contain;
+            display:block;
+            filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        /* MENÚ */
+        .menu{
+            display:flex;
+            align-items:center;
+            gap:28px;
+            flex-wrap:wrap;
+            margin-left:auto;
+        }
+
+        .menu a{
+            font-family:'Nunito',sans-serif;
+            font-size:19px;
+            font-weight:700;
+            color:#6f5441;
+            position:relative;
+            transition:color 0.25s ease, transform 0.25s ease;
+        }
+
+        .menu a:hover{
+            color:#8c6a52;
+            transform:translateY(-1px);
+        }
+
+        .menu a::after{
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:2px;
+            background:#b28e73;
+            transition:width 0.25s ease;
+        }
+
+        .menu a:hover::after{
+            width:100%;
+        }
+
+        /* BOTÓN LOGIN */
+        .login-link{
+            padding:10px 18px;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5 !important;
+            box-shadow:0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .login-link:hover{
+            background:#a9866d;
+            color:#ffffff !important;
+        }
+
+        .login-link::after{
+            display:none;
+        }
+
+        /* HERO */
+        .hero{
+            width:90%;
+            max-width:1400px;
+            height:480px;
+            margin:40px auto;
+            border-radius:30px;
+            overflow:hidden;
+            position:relative;
+            display:flex;
+            background:#cfbeaf;
+            box-shadow:0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* IZQUIERDA NÍTIDA */
+        .hero-left{
+            width:60%;
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            transition:background-image 0.6s ease-in-out;
+        }
+
+        /* DERECHA SUAVE */
+        .hero-right{
+            width:40%;
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            filter:blur(3px);
+            opacity:0.6;
+            transform:scale(1.04);
+            transition:background-image 0.6s ease-in-out;
+        }
+
+        /* TEXTO */
+        .hero-content{
+            position:absolute;
+            right:40px;
+            top:50%;
+            transform:translateY(-50%);
+            z-index:2;
+        }
+
+        .box{
+            background:rgba(255,255,255,0.75);
+            padding:40px;
+            border-radius:25px;
+            max-width:420px;
+            backdrop-filter:blur(6px);
+            box-shadow:0 8px 20px rgba(0,0,0,0.04);
+        }
+
+        h1{
+            font-family:'Cormorant Garamond',serif;
+            font-size:54px;
+            line-height:1.02;
+            margin-bottom:15px;
+            color:#4a3a30;
+        }
+
+        p{
+            font-size:16px;
+            line-height:1.6;
+            color:#5b4b40;
+        }
+
+        /* FOOTER */
+        footer{
+            background:#dac9ba;
+            padding:25px;
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .instagram-link{
+            color:#7a5f4b;
+            margin-top:10px;
+            display:inline-block;
+            font-weight:600;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px){
+            .navbar{
+                padding:16px 0;
+                flex-direction:column;
+                justify-content:center;
+            }
+
+            .logo img{
+                height:85px;
+            }
+
+            .menu{
+                justify-content:center;
+                margin-left:0;
+                gap:18px;
+            }
+
+            .menu a{
+                font-size:17px;
+            }
+
+            .hero{
+                height:420px;
+            }
+
+            .hero-content{
+                right:24px;
+            }
+
+            .box{
+                max-width:360px;
+                padding:30px;
+            }
+
+            h1{
+                font-size:46px;
+            }
+        }
+
+        @media (max-width: 768px){
+            .hero{
+                width:94%;
+                height:380px;
+            }
+
+            .hero-left{
+                width:55%;
+            }
+
+            .hero-right{
+                width:45%;
+            }
+
+            .hero-content{
+                right:18px;
+            }
+
+            .box{
+                max-width:300px;
+                padding:24px;
+            }
+
+            h1{
+                font-size:38px;
+            }
+
+            p{
+                font-size:15px;
+            }
+        }
+
+        @media (max-width: 600px){
+            .menu{
+                gap:14px;
+            }
+
+            .menu a{
+                font-size:16px;
+            }
+
+            .login-link{
+                padding:8px 14px;
+            }
+
+            .hero{
+                display:block;
+                height:420px;
+            }
+
+            .hero-left,
+            .hero-right{
+                position:absolute;
+                inset:0;
+                width:100%;
+                height:100%;
+            }
+
+            .hero-left{
+                background-position:center left;
+            }
+
+            .hero-right{
+                opacity:0.28;
+                filter:blur(4px);
+            }
+
+            .hero-content{
+                left:16px;
+                right:16px;
+                top:auto;
+                bottom:18px;
+                transform:none;
+            }
+
+            .box{
+                max-width:100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Coral Pilates Studio Logo">
+        </div>
+
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Conócenos</a>
+            <a href="#">Tratamientos</a>
+            <a href="/web/sesiones">Reservas</a>
+            <a href="#">Boutique</a>
+            <a href="#">Contacto</a>
+            <a href="#" class="login-link">Login</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-left" id="heroLeft"></div>
+    <div class="hero-right" id="heroRight"></div>
+
+    <div class="hero-content">
+        <div class="box">
+            <h1>Pilates con equilibrio</h1>
+            <p>Un espacio natural y elegante para cuidar cuerpo y mente.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© Coral Pilates Studio</p>
+    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+        Instagram
+    </a>
+</footer>
+
+<script>
+    const images = [
+        "/images/slide1.png",
+        "/images/slide2.png",
+        "/images/slide3.png",
+        "/images/slide4.png",
+        "/images/slide5.png",
+        "/images/slide6.png",
+        "/images/slide7.png",
+        "/images/slide8.png",
+        "/images/slide9.png",
+        "/images/slide10.png"
+    ];
+
+    let index = 0;
+
+    const left = document.getElementById("heroLeft");
+    const right = document.getElementById("heroRight");
+
+    function changeImage() {
+        left.style.backgroundImage = `url(${images[index]})`;
+        right.style.backgroundImage = `url(${images[index]})`;
+        index = (index + 1) % images.length;
+    }
+
+    changeImage();
+    setInterval(changeImage, 5000);
+</script>
+
+</body>
+</html>
