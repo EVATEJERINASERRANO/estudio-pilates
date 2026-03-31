@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,6 @@
             text-decoration:none;
         }
 
-        /* HEADER */
         header{
             position:sticky;
             top:0;
@@ -96,24 +96,6 @@
             width:100%;
         }
 
-        .login-link{
-            padding:10px 18px;
-            border-radius:999px;
-            background:#b9987f;
-            color:#fffaf5 !important;
-            box-shadow:0 4px 10px rgba(0,0,0,0.06);
-        }
-
-        .login-link:hover{
-            background:#a9866d;
-            color:#ffffff !important;
-        }
-
-        .login-link::after{
-            display:none;
-        }
-
-        /* HERO */
         .boutique-hero{
             width:90%;
             max-width:1400px;
@@ -207,7 +189,6 @@
         .swatch-black{ background:#1f1f1f; }
         .swatch-beige{ background:#d7c2ad; }
 
-        /* GALERÍA */
         .gallery-section{
             width:90%;
             max-width:1400px;
@@ -257,7 +238,6 @@
             transform:scale(1.03);
         }
 
-        /* LISTA DE PRODUCTOS */
         .catalog-section{
             width:90%;
             max-width:1100px;
@@ -318,7 +298,6 @@
             flex-wrap:wrap;
         }
 
-        /* MODAL */
         .image-modal{
             display:none;
             position:fixed;
@@ -431,10 +410,6 @@
                 font-size:16px;
             }
 
-            .login-link{
-                padding:8px 14px;
-            }
-
             .boutique-hero,
             .gallery-section,
             .catalog-section{
@@ -453,13 +428,12 @@
         </div>
 
         <nav class="menu">
-            <a href="/">Inicio</a>
-            <a href="/conocenos">Conócenos</a>
-            <a href="/experiencias">Experiencias</a>
-            <a href="/sesiones-web">Reservas</a>
-            <a href="/boutique">Boutique</a>
-            <a href="/contacto">Contacto</a>
-            <a href="#" class="login-link">Login</a>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/conocenos}">Conócenos</a>
+            <a th:href="@{/experiencias}">Experiencias</a>
+            <a th:href="@{/sesiones-web}">Reservas</a>
+            <a th:href="@{/boutique}">Boutique</a>
+            <a th:href="@{/contacto}">Contacto</a>
         </nav>
     </div>
 </header>
