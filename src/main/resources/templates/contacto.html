@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Coral Pilates Studio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#e8ddd2;
+            color:#4c4036;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* HEADER */
+        header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#eee2d7;
+            border-bottom:1px solid #d5c5b6;
+            box-shadow:0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .navbar{
+            width:95%;
+            max-width:1500px;
+            margin:auto;
+            min-height:110px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:28px;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            flex-shrink:0;
+        }
+
+        .logo img{
+            height:95px;
+            width:auto;
+            object-fit:contain;
+            display:block;
+            filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        .menu{
+            display:flex;
+            align-items:center;
+            gap:28px;
+            flex-wrap:wrap;
+            margin-left:auto;
+        }
+
+        .menu a{
+            font-family:'Nunito',sans-serif;
+            font-size:19px;
+            font-weight:700;
+            color:#6f5441;
+            position:relative;
+            transition:color 0.25s ease, transform 0.25s ease;
+        }
+
+        .menu a:hover{
+            color:#8c6a52;
+            transform:translateY(-1px);
+        }
+
+        .menu a::after{
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:2px;
+            background:#b28e73;
+            transition:width 0.25s ease;
+        }
+
+        .menu a:hover::after{
+            width:100%;
+        }
+
+        .login-link{
+            padding:10px 18px;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5 !important;
+            box-shadow:0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .login-link:hover{
+            background:#a9866d;
+            color:#ffffff !important;
+        }
+
+        .login-link::after{
+            display:none;
+        }
+
+        /* HERO CONTACTO */
+        .contact-hero{
+            width:90%;
+            max-width:1400px;
+            margin:26px auto 18px;
+            display:grid;
+            grid-template-columns:1.05fr 0.95fr;
+            gap:24px;
+            align-items:stretch;
+        }
+
+        .contact-hero-image{
+            border-radius:30px;
+            overflow:hidden;
+            box-shadow:0 18px 34px rgba(0,0,0,0.07);
+            height:380px;
+        }
+
+        .contact-hero-image img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        }
+
+        .contact-hero-copy{
+            background:rgba(255,255,255,0.74);
+            border-radius:30px;
+            padding:30px 32px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            box-shadow:0 12px 24px rgba(0,0,0,0.04);
+        }
+
+        .contact-kicker{
+            font-family:'Nunito',sans-serif;
+            font-size:14px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#9b7c65;
+            margin-bottom:12px;
+        }
+
+        .contact-hero-copy h1{
+            font-family:'Cormorant Garamond',serif;
+            font-size:52px;
+            line-height:0.95;
+            color:#4a3a30;
+            margin-bottom:14px;
+        }
+
+        .contact-hero-copy p{
+            font-size:16px;
+            line-height:1.7;
+            color:#5b4b40;
+            margin-bottom:10px;
+        }
+
+        /* BLOQUE PRINCIPAL */
+        .contacto-main{
+            width:90%;
+            max-width:1400px;
+            margin:0 auto 34px;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:28px;
+            align-items:start;
+        }
+
+        .contact-card,
+        .map-card{
+            background:rgba(255,255,255,0.72);
+            border-radius:30px;
+            padding:30px;
+            box-shadow:0 12px 24px rgba(0,0,0,0.04);
+        }
+
+        .section-heading{
+            font-family:'Cormorant Garamond',serif;
+            font-size:42px;
+            color:#4a3a30;
+            margin-bottom:16px;
+        }
+
+        /* FORM */
+        .contact-form{
+            display:flex;
+            flex-direction:column;
+            gap:16px;
+        }
+
+        .contact-form label{
+            font-weight:700;
+            font-size:15px;
+            color:#6f5441;
+            margin-bottom:6px;
+            display:block;
+        }
+
+        .contact-form input,
+        .contact-form textarea{
+            width:100%;
+            padding:14px 16px;
+            border:1px solid #d5c5b6;
+            border-radius:18px;
+            background:#fffaf6;
+            font-family:'Inter',sans-serif;
+            font-size:15px;
+            color:#4c4036;
+            outline:none;
+            transition:border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus{
+            border-color:#b28e73;
+            box-shadow:0 0 0 4px rgba(178,142,115,0.12);
+        }
+
+        .contact-form textarea{
+            min-height:140px;
+            resize:vertical;
+        }
+
+        .contact-button{
+            margin-top:4px;
+            align-self:flex-start;
+            padding:14px 26px;
+            border:none;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5;
+            font-family:'Nunito',sans-serif;
+            font-size:16px;
+            font-weight:700;
+            cursor:pointer;
+            transition:background 0.25s ease, transform 0.25s ease;
+        }
+
+        .contact-button:hover{
+            background:#a9866d;
+            transform:translateY(-1px);
+        }
+
+        /* INFO */
+        .info-list{
+            display:grid;
+            gap:12px;
+            margin-bottom:18px;
+        }
+
+        .info-item{
+            background:#fffaf6;
+            border-radius:18px;
+            padding:14px 16px;
+            border:1px solid #e0d2c5;
+        }
+
+        .info-item strong{
+            display:block;
+            color:#6f5441;
+            margin-bottom:5px;
+            font-size:15px;
+        }
+
+        .info-item span{
+            color:#5b4b40;
+            line-height:1.6;
+            font-size:15px;
+        }
+
+        .map-wrap{
+            overflow:hidden;
+            border-radius:22px;
+            border:1px solid #e0d2c5;
+        }
+
+        .map-wrap iframe{
+            width:100%;
+            height:340px;
+            border:0;
+            display:block;
+        }
+
+        footer{
+            background:#dac9ba;
+            padding:25px;
+            text-align:center;
+            margin-top:24px;
+        }
+
+        .instagram-link{
+            color:#7a5f4b;
+            margin-top:10px;
+            display:inline-block;
+            font-weight:600;
+        }
+
+        @media (max-width: 1200px){
+            .contact-hero{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media (max-width: 1100px){
+            .navbar{
+                padding:16px 0;
+                flex-direction:column;
+                justify-content:center;
+            }
+
+            .logo img{
+                height:85px;
+            }
+
+            .menu{
+                justify-content:center;
+                margin-left:0;
+                gap:18px;
+            }
+
+            .menu a{
+                font-size:17px;
+            }
+
+            .contacto-main{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media (max-width: 768px){
+            .contact-hero,
+            .contacto-main{
+                width:94%;
+            }
+
+            .contact-hero-copy{
+                padding:26px 22px;
+            }
+
+            .contact-hero-copy h1{
+                font-size:44px;
+            }
+
+            .section-heading{
+                font-size:38px;
+            }
+
+            .contact-card,
+            .map-card{
+                padding:24px 20px;
+            }
+
+            .map-wrap iframe{
+                height:300px;
+            }
+
+            .contact-hero-image{
+                height:320px;
+            }
+        }
+
+        @media (max-width: 600px){
+            .menu{
+                gap:14px;
+            }
+
+            .menu a{
+                font-size:16px;
+            }
+
+            .login-link{
+                padding:8px 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Coral Pilates Studio Logo">
+        </div>
+
+        <nav class="menu">
+            <a href="/">Inicio</a>
+            <a href="/conocenos">Conócenos</a>
+            <a href="/experiencias">Experiencias</a>
+            <a href="/sesiones-web">Reservas</a>
+            <a href="/boutique">Boutique</a>
+            <a href="/contacto">Contacto</a>
+            <a href="#" class="login-link">Login</a>
+        </nav>
+    </div>
+</header>
+
+<section class="contact-hero">
+    <div class="contact-hero-image">
+        <img th:src="@{/images/contacto1.png}" alt="Coral Pilates Studio contacto">
+    </div>
+
+    <div class="contact-hero-copy">
+        <div class="contact-kicker">Coral Pilates Studio</div>
+        <h1>Contacto</h1>
+        <p>
+            Hola, estamos aquí para ayudarte. Si tienes dudas sobre nuestras clases, tu primera sesión de prueba,
+            las experiencias o la boutique, estaremos encantadas de acompañarte y resolver lo que necesites.
+        </p>
+        <p>
+            Queremos que encuentres en Coral un espacio cercano, cuidado y pensado para ti desde el primer momento,
+            por eso estaremos felices de leerte y ayudarte a dar ese primer paso.
+        </p>
+    </div>
+</section>
+
+<section class="contacto-main">
+    <div class="contact-card">
+        <h2 class="section-heading">Escríbenos</h2>
+
+        <form class="contact-form">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+            </div>
+
+            <div>
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu teléfono">
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Tu email">
+            </div>
+
+            <div>
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos en qué podemos ayudarte"></textarea>
+            </div>
+
+            <button type="submit" class="contact-button">Enviar mensaje</button>
+        </form>
+    </div>
+
+    <div class="map-card">
+        <h2 class="section-heading">Ubicación</h2>
+
+        <div class="info-list">
+            <div class="info-item">
+                <strong>Dirección</strong>
+                <span>C/ Real n34, La Unión, Murcia 30360</span>
+            </div>
+
+            <div class="info-item">
+                <strong>Email</strong>
+                <span>hola@coralpilatesstudio.com</span>
+            </div>
+
+            <div class="info-item">
+                <strong>Teléfono</strong>
+                <span>+34 600 000 000</span>
+            </div>
+
+            <div class="info-item">
+                <strong>Horario</strong>
+                <span>Lunes a viernes · 9:00 a 13:30 · 17:00 a 21:00</span>
+            </div>
+        </div>
+
+        <div class="map-wrap">
+            <iframe
+                    src="https://www.google.com/maps?q=C%2FReal%20n34%2C%20La%20Uni%C3%B3n%2C%20Murcia%2030360&output=embed"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© Coral Pilates Studio</p>
+    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+        Instagram
+    </a>
+</footer>
+
+</body>
+</html>

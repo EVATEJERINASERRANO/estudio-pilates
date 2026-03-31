@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conócenos - Coral Pilates Studio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================= */
+    /* RESET GENERAL */
+    /* ============================= */
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#e8ddd2;
+      color:#4c4036;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    /* ============================= */
+    /* HEADER - IGUAL QUE INDEX */
+    /* ============================= */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#eee2d7;
+      border-bottom:1px solid #d5c5b6;
+      box-shadow:0 3px 10px rgba(0,0,0,0.03);
+    }
+
+    .navbar{
+      width:95%;
+      max-width:1500px;
+      margin:auto;
+      min-height:110px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      flex-shrink:0;
+    }
+
+    .logo img{
+      height:95px;
+      width:auto;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+    }
+
+    /* ============================= */
+    /* MENÚ */
+    /* ============================= */
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      flex-wrap:wrap;
+      margin-left:auto;
+    }
+
+    .menu a{
+      font-family:'Nunito',sans-serif;
+      font-size:19px;
+      font-weight:700;
+      color:#6f5441;
+      position:relative;
+      transition:color 0.25s ease, transform 0.25s ease;
+    }
+
+    .menu a:hover{
+      color:#8c6a52;
+      transform:translateY(-1px);
+    }
+
+    .menu a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:#b28e73;
+      transition:width 0.25s ease;
+    }
+
+    .menu a:hover::after{
+      width:100%;
+    }
+
+    /* ============================= */
+    /* BOTÓN LOGIN */
+    /* ============================= */
+    .login-link{
+      padding:10px 18px;
+      border-radius:999px;
+      background:#b9987f;
+      color:#fffaf5 !important;
+      box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .login-link:hover{
+      background:#a9866d;
+      color:#ffffff !important;
+    }
+
+    .login-link::after{
+      display:none;
+    }
+
+    /* ============================= */
+    /* SECCIÓN CONÓCENOS */
+    /* ============================= */
+    .conocenos-section{
+      width:90%;
+      max-width:1400px;
+      margin:45px auto;
+      display:flex;
+      align-items:center;
+      gap:40px;
+    }
+
+    /* IMAGEN MÁS PEQUEÑA */
+    .conocenos-image{
+      width:36%;
+      flex-shrink:0;
+    }
+
+    .conocenos-image img{
+      width:100%;
+      height:430px;
+      object-fit:cover;
+      border-radius:30px;
+      display:block;
+      box-shadow:0 18px 34px rgba(0,0,0,0.08);
+    }
+
+    /* RECUADRO MÁS GRANDE */
+    .conocenos-box{
+      width:64%;
+      background:rgba(255,255,255,0.78);
+      padding:48px;
+      border-radius:30px;
+      backdrop-filter:blur(6px);
+      box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .conocenos-box h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:62px;
+      line-height:1;
+      margin-bottom:20px;
+      color:#4a3a30;
+    }
+
+    .conocenos-box .linea{
+      width:80px;
+      height:2px;
+      background:#b28e73;
+      margin-bottom:22px;
+      border-radius:2px;
+    }
+
+    .conocenos-box p{
+      font-size:17px;
+      line-height:1.8;
+      color:#5b4b40;
+      margin-bottom:16px;
+    }
+
+    .conocenos-box p:last-child{
+      margin-bottom:0;
+    }
+
+    /* ============================= */
+    /* BLOQUE INFERIOR */
+    /* ============================= */
+    .conocenos-extra{
+      width:90%;
+      max-width:1400px;
+      margin:0 auto 30px;
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+    }
+
+    .extra-card{
+      background:rgba(255,255,255,0.62);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:0 8px 18px rgba(0,0,0,0.04);
+    }
+
+    .extra-card h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:34px;
+      color:#4a3a30;
+      margin-bottom:10px;
+    }
+
+    .extra-card p{
+      font-size:16px;
+      line-height:1.7;
+      color:#5b4b40;
+    }
+
+    /* ============================= */
+    /* FOOTER */
+    /* ============================= */
+    footer{
+      background:#dac9ba;
+      padding:25px;
+      text-align:center;
+      margin-top:20px;
+    }
+
+    .instagram-link{
+      color:#7a5f4b;
+      margin-top:10px;
+      display:inline-block;
+      font-weight:600;
+    }
+
+    /* ============================= */
+    /* RESPONSIVE */
+    /* ============================= */
+    @media (max-width: 1100px){
+      .navbar{
+        padding:16px 0;
+        flex-direction:column;
+        justify-content:center;
+      }
+
+      .logo img{
+        height:85px;
+      }
+
+      .menu{
+        justify-content:center;
+        margin-left:0;
+        gap:18px;
+      }
+
+      .menu a{
+        font-size:17px;
+      }
+
+      .conocenos-section{
+        flex-direction:column;
+        gap:28px;
+      }
+
+      .conocenos-image,
+      .conocenos-box{
+        width:100%;
+      }
+
+      .conocenos-image img{
+        height:420px;
+      }
+
+      .conocenos-box{
+        padding:38px;
+      }
+
+      .conocenos-box h1{
+        font-size:52px;
+      }
+
+      .conocenos-extra{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 768px){
+      .conocenos-section{
+        width:94%;
+        margin:30px auto;
+      }
+
+      .conocenos-image img{
+        height:340px;
+      }
+
+      .conocenos-box{
+        padding:30px 24px;
+      }
+
+      .conocenos-box h1{
+        font-size:44px;
+      }
+
+      .conocenos-box p{
+        font-size:16px;
+      }
+
+      .conocenos-extra{
+        width:94%;
+      }
+    }
+
+    @media (max-width: 600px){
+      .menu{
+        gap:14px;
+      }
+
+      .menu a{
+        font-size:16px;
+      }
+
+      .login-link{
+        padding:8px 14px;
+      }
+
+      .conocenos-box h1{
+        font-size:38px;
+      }
+
+      .extra-card h2{
+        font-size:30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <img th:src="@{/images/logo.png}" alt="Coral Pilates Studio Logo">
+    </div>
+
+    <nav class="menu">
+      <a href="/">Inicio</a>
+      <a href="/conocenos">Conócenos</a>
+      <a href="/experiencias">Experiencias</a>
+      <a href="/sesiones-web">Reservas</a>
+      <a href="/boutique">Boutique</a>
+      <a href="#">Contacto</a>
+      <a href="#" class="login-link">Login</a>
+    </nav>
+  </div>
+</header>
+
+<section class="conocenos-section">
+
+  <div class="conocenos-image">
+    <img th:src="@{/images/estudio.png}" alt="Nuestro estudio">
+  </div>
+
+  <div class="conocenos-box">
+    <h1>Conócenos</h1>
+    <div class="linea"></div>
+
+    <p>
+      Coral Pilates Studio surge con ilusión, sensibilidad y el deseo de crear un espacio donde el bienestar
+      se viva de una forma real, cercana y consciente. Un lugar pensado para quienes desean regalarse tiempo,
+      cuidarse y reconectar con su cuerpo desde la calma.
+    </p>
+
+    <p>
+      Creemos en el pilates como una práctica transformadora, capaz de fortalecer el cuerpo desde dentro,
+      mejorar la postura, aumentar la flexibilidad y aportar equilibrio físico y mental en el día a día.
+    </p>
+
+    <p>
+      Apostamos especialmente por el pilates con máquinas, porque permite un trabajo más profundo, preciso
+      y adaptado a cada persona. Cada sesión está diseñada para acompañarte en tu proceso, sea cual sea tu nivel,
+      con atención personalizada y mimo en cada detalle.
+    </p>
+
+    <p>
+      En Coral Pilates Studio queremos que cada clase sea mucho más que ejercicio: un momento para respirar,
+      enfocarte, sentirte bien y dar ese primer paso hacia una versión más fuerte, flexible y equilibrada de ti.
+    </p>
+  </div>
+
+</section>
+
+<section class="conocenos-extra">
+  <div class="extra-card">
+    <h2>Nuestra esencia</h2>
+    <p>
+      Un estudio acogedor y elegante donde cada persona encuentra su propio ritmo, con una atención
+      cercana y una experiencia cuidada desde el primer momento.
+    </p>
+  </div>
+
+  <div class="extra-card">
+    <h2>Nuestra visión</h2>
+    <p>
+      Queremos inspirar bienestar a través del movimiento consciente, ayudando a que cada sesión
+      sume fuerza, equilibrio, confianza y conexión cuerpo-mente.
+    </p>
+  </div>
+
+  <div class="extra-card">
+    <h2>Nuestro compromiso</h2>
+    <p>
+      Acompañarte con profesionalidad, sensibilidad y dedicación para que descubras todos los beneficios
+      del pilates y disfrutes del proceso desde la primera clase.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© Coral Pilates Studio</p>
+  <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+    Instagram
+  </a>
+</footer>
+
+</body>
+</html>

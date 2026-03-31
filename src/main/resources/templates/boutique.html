@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Coral Pilates Studio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#e8ddd2;
+            color:#4c4036;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* HEADER */
+        header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#eee2d7;
+            border-bottom:1px solid #d5c5b6;
+            box-shadow:0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .navbar{
+            width:95%;
+            max-width:1500px;
+            margin:auto;
+            min-height:110px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:28px;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            flex-shrink:0;
+        }
+
+        .logo img{
+            height:95px;
+            width:auto;
+            object-fit:contain;
+            display:block;
+            filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        .menu{
+            display:flex;
+            align-items:center;
+            gap:28px;
+            flex-wrap:wrap;
+            margin-left:auto;
+        }
+
+        .menu a{
+            font-family:'Nunito',sans-serif;
+            font-size:19px;
+            font-weight:700;
+            color:#6f5441;
+            position:relative;
+            transition:color 0.25s ease, transform 0.25s ease;
+        }
+
+        .menu a:hover{
+            color:#8c6a52;
+            transform:translateY(-1px);
+        }
+
+        .menu a::after{
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:2px;
+            background:#b28e73;
+            transition:width 0.25s ease;
+        }
+
+        .menu a:hover::after{
+            width:100%;
+        }
+
+        .login-link{
+            padding:10px 18px;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5 !important;
+            box-shadow:0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .login-link:hover{
+            background:#a9866d;
+            color:#ffffff !important;
+        }
+
+        .login-link::after{
+            display:none;
+        }
+
+        /* HERO */
+        .boutique-hero{
+            width:90%;
+            max-width:1400px;
+            margin:42px auto 28px;
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            gap:24px;
+            align-items:stretch;
+        }
+
+        .hero-image{
+            border-radius:30px;
+            overflow:hidden;
+            box-shadow:0 18px 34px rgba(0,0,0,0.07);
+            min-height:500px;
+            cursor:pointer;
+        }
+
+        .hero-image img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            transition:transform 0.4s ease;
+        }
+
+        .hero-image:hover img{
+            transform:scale(1.03);
+        }
+
+        .hero-copy{
+            background:rgba(255,255,255,0.74);
+            border-radius:30px;
+            padding:44px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            box-shadow:0 12px 24px rgba(0,0,0,0.04);
+        }
+
+        .hero-kicker{
+            font-family:'Nunito',sans-serif;
+            font-size:14px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#9b7c65;
+            margin-bottom:14px;
+        }
+
+        .hero-copy h1{
+            font-family:'Cormorant Garamond',serif;
+            font-size:64px;
+            line-height:0.95;
+            color:#4a3a30;
+            margin-bottom:18px;
+        }
+
+        .hero-copy p{
+            font-size:17px;
+            line-height:1.8;
+            color:#5b4b40;
+            margin-bottom:14px;
+        }
+
+        .swatches{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-top:12px;
+            flex-wrap:wrap;
+        }
+
+        .swatches .label{
+            font-size:14px;
+            font-weight:600;
+            color:#6b5648;
+            margin-right:4px;
+        }
+
+        .swatch{
+            width:22px;
+            height:22px;
+            border-radius:50%;
+            border:1px solid rgba(0,0,0,0.10);
+            box-shadow:0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .swatch-crema{ background:#f1e6db; }
+        .swatch-choco{ background:#7b4b38; }
+        .swatch-coral{ background:#ddb8ac; }
+        .swatch-black{ background:#1f1f1f; }
+        .swatch-beige{ background:#d7c2ad; }
+
+        /* GALERÍA */
+        .gallery-section{
+            width:90%;
+            max-width:1400px;
+            margin:0 auto 36px;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:24px;
+        }
+
+        .section-title h2{
+            font-family:'Cormorant Garamond',serif;
+            font-size:52px;
+            color:#4a3a30;
+            margin-bottom:8px;
+        }
+
+        .section-title p{
+            color:#6b5648;
+            font-size:17px;
+        }
+
+        .gallery-grid{
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:24px;
+        }
+
+        .gallery-card{
+            border-radius:28px;
+            overflow:hidden;
+            box-shadow:0 15px 30px rgba(0,0,0,0.08);
+            cursor:pointer;
+            background:#f4ece4;
+        }
+
+        .gallery-card img{
+            width:100%;
+            height:420px;
+            object-fit:cover;
+            display:block;
+            transition:transform 0.35s ease;
+        }
+
+        .gallery-card:hover img{
+            transform:scale(1.03);
+        }
+
+        /* LISTA DE PRODUCTOS */
+        .catalog-section{
+            width:90%;
+            max-width:1100px;
+            margin:0 auto 34px;
+            background:rgba(255,255,255,0.70);
+            border-radius:30px;
+            padding:36px 34px;
+            box-shadow:0 12px 24px rgba(0,0,0,0.04);
+        }
+
+        .catalog-group{
+            margin-bottom:30px;
+        }
+
+        .catalog-group:last-child{
+            margin-bottom:0;
+        }
+
+        .catalog-group h3{
+            font-family:'Cormorant Garamond',serif;
+            font-size:42px;
+            color:#4a3a30;
+            margin-bottom:16px;
+        }
+
+        .catalog-list{
+            list-style:none;
+            border-top:1px solid rgba(122,95,75,0.16);
+        }
+
+        .catalog-list li{
+            display:grid;
+            grid-template-columns:1.4fr auto 1fr;
+            gap:20px;
+            align-items:center;
+            padding:16px 0;
+            border-bottom:1px solid rgba(122,95,75,0.16);
+        }
+
+        .item-name{
+            font-size:18px;
+            color:#4a3a30;
+            font-weight:600;
+        }
+
+        .item-price{
+            font-weight:700;
+            color:#8b674f;
+            font-size:17px;
+            white-space:nowrap;
+        }
+
+        .item-colors{
+            display:flex;
+            justify-content:flex-end;
+            gap:8px;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        /* MODAL */
+        .image-modal{
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.84);
+            z-index:5000;
+            align-items:center;
+            justify-content:center;
+            padding:40px;
+        }
+
+        .image-modal.active{
+            display:flex;
+        }
+
+        .image-modal img{
+            max-width:90vw;
+            max-height:88vh;
+            object-fit:contain;
+            border-radius:20px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.35);
+            background:white;
+        }
+
+        .modal-close{
+            position:absolute;
+            top:22px;
+            right:28px;
+            font-size:40px;
+            color:white;
+            cursor:pointer;
+            line-height:1;
+        }
+
+        footer{
+            background:#dac9ba;
+            padding:25px;
+            text-align:center;
+            margin-top:24px;
+        }
+
+        .instagram-link{
+            color:#7a5f4b;
+            margin-top:10px;
+            display:inline-block;
+            font-weight:600;
+        }
+
+        @media (max-width: 1200px){
+            .boutique-hero{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media (max-width: 1100px){
+            .navbar{
+                padding:16px 0;
+                flex-direction:column;
+                justify-content:center;
+            }
+
+            .logo img{
+                height:85px;
+            }
+
+            .menu{
+                justify-content:center;
+                margin-left:0;
+                gap:18px;
+            }
+
+            .menu a{
+                font-size:17px;
+            }
+        }
+
+        @media (max-width: 768px){
+            .gallery-grid{
+                grid-template-columns:1fr;
+            }
+
+            .hero-copy{
+                padding:30px 24px;
+            }
+
+            .hero-copy h1{
+                font-size:46px;
+            }
+
+            .section-title h2{
+                font-size:42px;
+            }
+
+            .catalog-list li{
+                grid-template-columns:1fr;
+                gap:10px;
+            }
+
+            .item-colors{
+                justify-content:flex-start;
+            }
+        }
+
+        @media (max-width: 600px){
+            .menu{
+                gap:14px;
+            }
+
+            .menu a{
+                font-size:16px;
+            }
+
+            .login-link{
+                padding:8px 14px;
+            }
+
+            .boutique-hero,
+            .gallery-section,
+            .catalog-section{
+                width:94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Coral Pilates Studio Logo">
+        </div>
+
+        <nav class="menu">
+            <a href="/">Inicio</a>
+            <a href="/conocenos">Conócenos</a>
+            <a href="/experiencias">Experiencias</a>
+            <a href="/sesiones-web">Reservas</a>
+            <a href="/boutique">Boutique</a>
+            <a href="/contacto">Contacto</a>
+            <a href="#" class="login-link">Login</a>
+        </nav>
+    </div>
+</header>
+
+<section class="boutique-hero">
+    <div class="hero-image" onclick="openModal('/images/boutique1.png')">
+        <img th:src="@{/images/boutique1.png}" alt="Colección CHIO">
+    </div>
+
+    <div class="hero-copy">
+        <div class="hero-kicker">Coral Pilates Studio × CHIO</div>
+        <h1>Boutique</h1>
+        <p>
+            Una colección pensada para acompañar tu movimiento con comodidad, suavidad y estilo.
+            Piezas versátiles, tonos cálidos y una estética cuidada que encaja con la esencia de Coral.
+        </p>
+        <p>
+            La selección CHIO reúne prendas y accesorios en blanco roto, marrón chocolate y coral pastel,
+            una paleta elegante y natural para dentro y fuera del estudio.
+        </p>
+
+        <div class="swatches">
+            <span class="label">Colores</span>
+            <span class="swatch swatch-crema" title="Blanco roto"></span>
+            <span class="swatch swatch-choco" title="Marrón chocolate"></span>
+            <span class="swatch swatch-coral" title="Coral pastel"></span>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <div class="section-title">
+        <h2>Editorial CHIO</h2>
+        <p>Haz click en cada imagen para verla ampliada.</p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-card" onclick="openModal('/images/boutique1.png')">
+            <img th:src="@{/images/boutique1.png}" alt="Look 1">
+        </div>
+
+        <div class="gallery-card" onclick="openModal('/images/boutique2.png')">
+            <img th:src="@{/images/boutique2.png}" alt="Look 2">
+        </div>
+
+        <div class="gallery-card" onclick="openModal('/images/boutique3.png')">
+            <img th:src="@{/images/boutique3.png}" alt="Look 3">
+        </div>
+
+        <div class="gallery-card" onclick="openModal('/images/boutique4.png')">
+            <img th:src="@{/images/boutique4.png}" alt="Look 4">
+        </div>
+    </div>
+</section>
+
+<section class="catalog-section">
+    <div class="catalog-group">
+        <h3>Prendas</h3>
+        <ul class="catalog-list">
+            <li>
+                <span class="item-name">Top</span>
+                <span class="item-price">12 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema" title="Blanco roto"></span>
+                    <span class="swatch swatch-choco" title="Marrón chocolate"></span>
+                    <span class="swatch swatch-coral" title="Coral pastel"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Malla corta</span>
+                <span class="item-price">14 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema"></span>
+                    <span class="swatch swatch-choco"></span>
+                    <span class="swatch swatch-coral"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Pirata</span>
+                <span class="item-price">15 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema"></span>
+                    <span class="swatch swatch-choco"></span>
+                    <span class="swatch swatch-coral"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Larga</span>
+                <span class="item-price">17 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema"></span>
+                    <span class="swatch swatch-choco"></span>
+                    <span class="swatch swatch-coral"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Mono corto</span>
+                <span class="item-price">19 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema"></span>
+                    <span class="swatch swatch-choco"></span>
+                    <span class="swatch swatch-coral"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Mono largo</span>
+                <span class="item-price">22 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-crema"></span>
+                    <span class="swatch swatch-choco"></span>
+                    <span class="swatch swatch-coral"></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="catalog-group">
+        <h3>Accesorios</h3>
+        <ul class="catalog-list">
+            <li>
+                <span class="item-name">Tote bag</span>
+                <span class="item-price">9 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-beige" title="Beige"></span>
+                    <span class="swatch swatch-black" title="Negra"></span>
+                </span>
+            </li>
+            <li>
+                <span class="item-name">Botella reutilizable</span>
+                <span class="item-price">7 €</span>
+                <span class="item-colors">
+                    <span class="swatch swatch-beige"></span>
+                    <span class="swatch swatch-black"></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <p>© Coral Pilates Studio</p>
+    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+        Instagram
+    </a>
+</footer>
+
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="Imagen ampliada">
+</div>
+
+<script>
+    function openModal(imageSrc) {
+        document.getElementById("modalImg").src = imageSrc;
+        document.getElementById("imageModal").classList.add("active");
+    }
+
+    function closeModal() {
+        document.getElementById("imageModal").classList.remove("active");
+    }
+</script>
+
+</body>
+</html>
