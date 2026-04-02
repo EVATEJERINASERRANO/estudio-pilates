@@ -1,15 +1,20 @@
 package com.pilates.estudiopilates.controller;
 
+import com.pilates.estudiopilates.model.Reserva;
 import com.pilates.estudiopilates.model.Sesion;
+import com.pilates.estudiopilates.service.ReservaService;
 import com.pilates.estudiopilates.service.SesionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -17,9 +22,11 @@ import java.util.stream.Collectors;
 public class WebController {
 
     private final SesionService sesionService;
+    private final ReservaService reservaService;
 
-    public WebController(SesionService sesionService) {
+    public WebController(SesionService sesionService, ReservaService reservaService) {
         this.sesionService = sesionService;
+        this.reservaService = reservaService;
     }
 
     @GetMapping("/conocenos")
@@ -28,7 +35,7 @@ public class WebController {
     }
 
     @GetMapping("/sesiones-web")
-    public String sesionesWeb(Model model) {
+    public String sesionesWeb(Model model, Principal principal) {
         List<Sesion> sesiones = sesionService.obtenerTodas();
 
         Map<LocalDate, List<Sesion>> sesionesPorDia = sesiones.stream()
@@ -41,6 +48,19 @@ public class WebController {
                 ));
 
         model.addAttribute("sesionesPorDia", sesionesPorDia);
+
+        if (principal != null) {
+            String email = principal.getName();
+
+            List<Reserva> misReservas = reservaService.obtenerReservasPorEmail(email);
+            Set<Long> sesionesReservadasIds = reservaService.obtenerIdsSesionesReservadasPorEmail(email);
+
+            model.addAttribute("misReservas", misReservas);
+            model.addAttribute("sesionesReservadasIds", sesionesReservadasIds);
+        } else {
+            model.addAttribute("misReservas", Collections.emptyList());
+            model.addAttribute("sesionesReservadasIds", Collections.emptySet());
+        }
 
         return "sesiones";
     }

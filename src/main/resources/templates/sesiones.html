@@ -163,6 +163,96 @@
             box-shadow:0 6px 14px rgba(89,66,49,0.04);
         }
 
+        .alert{
+            margin-bottom:18px;
+            padding:14px 18px;
+            border-radius:16px;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .alert.ok{
+            background:#e8f3ea;
+            color:#315c38;
+            border:1px solid #cfe4d2;
+        }
+
+        .alert.error{
+            background:#f8e8e5;
+            color:#9c3f33;
+            border:1px solid #efc8c2;
+        }
+
+        .my-reservations{
+            margin-bottom:24px;
+            background:linear-gradient(180deg, #fffdfb 0%, #fdf7f2 100%);
+            border:1px solid #eaded3;
+            border-radius:26px;
+            padding:22px;
+            box-shadow:0 10px 22px rgba(89,66,49,0.05);
+        }
+
+        .my-reservations-head{
+            margin-bottom:16px;
+        }
+
+        .my-reservations-head h3{
+            font-family:'Cormorant Garamond',serif;
+            font-size:34px;
+            color:#4a3a30;
+            margin-bottom:6px;
+        }
+
+        .my-reservations-head p{
+            font-size:15px;
+            color:#7a6452;
+        }
+
+        .my-reservations-empty{
+            background:#fffaf6;
+            border:1px solid #eaded3;
+            border-radius:18px;
+            padding:16px;
+            color:#7a6452;
+            font-size:14px;
+        }
+
+        .my-reservations-list{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+            gap:14px;
+        }
+
+        .my-reservation-item{
+            background:#efe1d5;
+            border:1px solid rgba(122,90,68,0.10);
+            border-radius:20px;
+            padding:16px;
+            box-shadow:0 8px 18px rgba(89,66,49,0.05);
+        }
+
+        .my-reservation-day{
+            font-family:'Cormorant Garamond',serif;
+            font-size:24px;
+            color:#4a3a30;
+            margin-bottom:4px;
+            text-transform:capitalize;
+        }
+
+        .my-reservation-date{
+            font-size:14px;
+            color:#7f6451;
+            margin-bottom:10px;
+            text-transform:capitalize;
+        }
+
+        .my-reservation-time{
+            font-family:'Nunito',sans-serif;
+            font-size:22px;
+            font-weight:800;
+            color:#5a4537;
+        }
+
         .legend{
             display:flex;
             gap:14px;
@@ -196,6 +286,10 @@
 
         .full-dot{
             background:#5a4537;
+        }
+
+        .reserved-dot{
+            background:#b48b67;
         }
 
         .calendar-columns{
@@ -267,6 +361,12 @@
             background:#5a4537;
             color:#fffaf5;
             border:1px solid rgba(74,58,48,0.12);
+        }
+
+        .session-card-mini.reserved{
+            background:#cfa988;
+            color:#fffaf5;
+            border:1px solid rgba(122,90,68,0.14);
         }
 
         .session-hour{
@@ -357,6 +457,10 @@
                 grid-template-columns:1fr;
             }
 
+            .my-reservations-list{
+                grid-template-columns:1fr;
+            }
+
             .session-hour{
                 font-size:24px;
             }
@@ -374,7 +478,7 @@
                 <h1>Reserva tu sesión</h1>
                 <p class="intro">
                     Consulta las sesiones organizadas por día, identifica rápidamente qué horarios tienen plazas
-                    disponibles y reserva tu plaza en unos segundos con una experiencia visual más clara, elegante y cómoda.
+                    disponibles y revisa también las reservas que ya has confirmado.
                 </p>
             </div>
 
@@ -393,6 +497,43 @@
     </section>
 
     <section class="calendar-card">
+
+        <div th:if="${mensajeOk}" class="alert ok">
+            <span th:text="${mensajeOk}"></span>
+        </div>
+
+        <div th:if="${mensajeError}" class="alert error">
+            <span th:text="${mensajeError}"></span>
+        </div>
+
+        <div class="my-reservations">
+            <div class="my-reservations-head">
+                <h3>Mis reservas</h3>
+                <p>Aquí puedes ver de un vistazo las sesiones que ya has reservado.</p>
+            </div>
+
+            <div th:if="${#lists.isEmpty(misReservas)}" class="my-reservations-empty">
+                Todavía no has reservado ninguna sesión.
+            </div>
+
+            <div th:if="${!#lists.isEmpty(misReservas)}" class="my-reservations-list">
+                <div th:each="reserva : ${misReservas}" class="my-reservation-item">
+                    <div class="my-reservation-day"
+                         th:text="${#strings.capitalize(#temporals.format(reserva.sesion.fecha, 'EEEE'))}">
+                        Lunes
+                    </div>
+                    <div class="my-reservation-date"
+                         th:text="${#strings.capitalize(#temporals.format(reserva.sesion.fecha, 'd MMMM'))}">
+                        16 junio
+                    </div>
+                    <div class="my-reservation-time"
+                         th:text="${#temporals.format(reserva.sesion.hora, 'HH:mm')}">
+                        09:00
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="calendar-head">
             <div>
                 <h2>Agenda de reservas</h2>
@@ -412,6 +553,10 @@
             <div class="legend-item">
                 <span class="legend-dot full-dot"></span>
                 <span>Sesión completa</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot reserved-dot"></span>
+                <span>Ya reservada por ti</span>
             </div>
         </div>
 
@@ -433,7 +578,7 @@
                 <div class="day-sessions">
                     <div th:each="sesion : ${entry.value}"
                          class="session-card-mini"
-                         th:classappend="${sesion.plazasDisponibles == 0} ? ' full' : ' available'">
+                         th:classappend="${sesionesReservadasIds.contains(sesion.id)} ? ' reserved' : (${sesion.plazasDisponibles == 0} ? ' full' : ' available')">
 
                         <div class="session-hour"
                              th:text="${#temporals.format(sesion.hora, 'HH:mm')}">
@@ -445,11 +590,15 @@
                             4 plazas disponibles
                         </div>
 
-                        <span th:if="${sesion.plazasDisponibles == 0}" class="session-state">
+                        <span th:if="${sesionesReservadasIds.contains(sesion.id)}" class="session-state">
+                            Tu reserva
+                        </span>
+
+                        <span th:if="${!sesionesReservadasIds.contains(sesion.id) and sesion.plazasDisponibles == 0}" class="session-state">
                             Completo
                         </span>
 
-                        <form th:if="${sesion.plazasDisponibles > 0}"
+                        <form th:if="${!sesionesReservadasIds.contains(sesion.id) and sesion.plazasDisponibles > 0}"
                               th:action="@{/reservas}"
                               method="post"
                               class="mini-reserve-form">

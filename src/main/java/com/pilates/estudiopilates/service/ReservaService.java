@@ -13,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaService {
@@ -63,7 +65,8 @@ public class ReservaService {
         if (sesion.getFecha().isBefore(LocalDate.now())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "No se puede reservar una sesión pasada");
+                    "No se puede reservar una sesión pasada"
+            );
         }
 
         if (sesion.getPlazasDisponibles() <= 0) {
@@ -99,7 +102,6 @@ public class ReservaService {
         reservaRepository.delete(reserva);
     }
 
-    // NUEVO METODO
     public Reserva guardarDesdeEmail(String email, Long sesionId) {
 
         Usuario usuario = usuarioRepository.findByEmail(email)
@@ -109,5 +111,16 @@ public class ReservaService {
                 ));
 
         return guardar(usuario.getId(), sesionId);
+    }
+
+    public List<Reserva> obtenerReservasPorEmail(String email) {
+        return reservaRepository.findByUsuarioEmailOrderBySesionFechaAscSesionHoraAsc(email);
+    }
+
+    public Set<Long> obtenerIdsSesionesReservadasPorEmail(String email) {
+        return reservaRepository.findByUsuarioEmailOrderBySesionFechaAscSesionHoraAsc(email)
+                .stream()
+                .map(reserva -> reserva.getSesion().getId())
+                .collect(Collectors.toSet());
     }
 }
