@@ -1,20 +1,322 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Iniciar sesión</title>
+    <title>Iniciar sesión - Coral Pilates Studio</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            min-height:100vh;
+            color:#4c4036;
+            background:
+                    linear-gradient(rgba(76,64,54,0.28), rgba(76,64,54,0.20)),
+                    url('/images/reserva1.png') center center / cover no-repeat;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:24px;
+        }
+
+        .login-shell{
+            width:100%;
+            max-width:1180px;
+            min-height:680px;
+            display:grid;
+            grid-template-columns:1.1fr 0.9fr;
+            background:rgba(255,250,246,0.78);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(191,160,133,0.20);
+            border-radius:34px;
+            overflow:hidden;
+            box-shadow:0 22px 48px rgba(89,66,49,0.14);
+        }
+
+        .login-visual{
+            position:relative;
+            background:
+                    linear-gradient(rgba(74,58,48,0.18), rgba(74,58,48,0.12)),
+                    url('/images/reserva1.png') center center / cover no-repeat;
+            min-height:680px;
+            display:flex;
+            align-items:flex-end;
+            padding:42px;
+        }
+
+        .visual-overlay{
+            width:100%;
+            background:rgba(255,250,246,0.18);
+            border:1px solid rgba(255,250,246,0.24);
+            border-radius:26px;
+            padding:28px;
+            backdrop-filter:blur(4px);
+        }
+
+        .visual-kicker{
+            font-family:'Nunito',sans-serif;
+            font-size:13px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#fff7f0;
+            margin-bottom:12px;
+            font-weight:700;
+        }
+
+        .visual-title{
+            font-family:'Cormorant Garamond',serif;
+            font-size:54px;
+            line-height:0.95;
+            color:#fffaf5;
+            margin-bottom:14px;
+        }
+
+        .visual-text{
+            color:#fff7f0;
+            font-size:16px;
+            line-height:1.7;
+            max-width:460px;
+        }
+
+        .login-panel{
+            background:rgba(255,250,246,0.96);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:46px 38px;
+        }
+
+        .login-card{
+            width:100%;
+            max-width:430px;
+        }
+
+        .brand{
+            font-family:'Nunito',sans-serif;
+            font-size:13px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#9b7c65;
+            margin-bottom:10px;
+            font-weight:700;
+        }
+
+        h1{
+            font-family:'Cormorant Garamond',serif;
+            font-size:56px;
+            line-height:0.95;
+            color:#4a3a30;
+            margin-bottom:14px;
+        }
+
+        .intro{
+            font-size:15px;
+            line-height:1.7;
+            color:#6b5648;
+            margin-bottom:26px;
+        }
+
+        .alert{
+            margin-bottom:16px;
+            padding:14px 16px;
+            border-radius:16px;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .alert.error{
+            background:#f8e8e5;
+            color:#9c3f33;
+            border:1px solid #efc8c2;
+        }
+
+        .alert.ok{
+            background:#e8f3ea;
+            color:#315c38;
+            border:1px solid #cfe4d2;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        .form-label{
+            display:block;
+            margin-bottom:8px;
+            font-size:14px;
+            font-weight:700;
+            color:#6f5848;
+        }
+
+        .form-input{
+            width:100%;
+            padding:14px 16px;
+            border-radius:16px;
+            border:1px solid #dbcbbb;
+            background:#fffdfb;
+            color:#4c4036;
+            font-size:15px;
+            font-family:'Inter',sans-serif;
+            outline:none;
+            transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .form-input:focus{
+            border-color:#b9987f;
+            box-shadow:0 0 0 4px rgba(185,152,127,0.16);
+        }
+
+        .submit-button{
+            width:100%;
+            margin-top:8px;
+            padding:14px 18px;
+            border:none;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5;
+            font-family:'Nunito',sans-serif;
+            font-size:15px;
+            font-weight:800;
+            cursor:pointer;
+            transition:background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow:0 10px 20px rgba(185,152,127,0.25);
+        }
+
+        .submit-button:hover{
+            background:#a9866d;
+            transform:translateY(-1px);
+            box-shadow:0 12px 24px rgba(169,134,109,0.28);
+        }
+
+        .login-foot{
+            margin-top:18px;
+            font-size:13px;
+            color:#8a6b55;
+            text-align:center;
+            line-height:1.6;
+        }
+
+        @media (max-width: 980px){
+            .login-shell{
+                grid-template-columns:1fr;
+                max-width:560px;
+                min-height:auto;
+            }
+
+            .login-visual{
+                min-height:260px;
+                padding:24px;
+            }
+
+            .visual-title{
+                font-size:42px;
+            }
+
+            .login-panel{
+                padding:30px 22px;
+            }
+
+            h1{
+                font-size:46px;
+            }
+        }
+
+        @media (max-width: 640px){
+            body{
+                padding:16px;
+            }
+
+            .login-shell{
+                border-radius:24px;
+            }
+
+            .login-visual{
+                min-height:220px;
+                padding:18px;
+            }
+
+            .visual-overlay{
+                padding:20px;
+            }
+
+            .visual-title{
+                font-size:36px;
+            }
+
+            h1{
+                font-size:40px;
+            }
+
+            .login-panel{
+                padding:24px 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h1>Iniciar sesión</h1>
+<div class="login-shell">
 
-<form th:action="@{/login}" method="post">
-    <div>
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="username" required>
-    </div>
+    <section class="login-visual">
+        <div class="visual-overlay">
+            <div class="visual-kicker">Coral Pilates Studio</div>
+            <div class="visual-title">Tu espacio<br>de bienestar</div>
+            <p class="visual-text">
+                Accede a tu zona privada para consultar horarios, gestionar tus reservas
+                y seguir disfrutando de una experiencia cuidada, elegante y sencilla.
+            </p>
+        </div>
+    </section>
 
+    <section class="login-panel">
+        <div class="login-card">
+            <div class="brand">Acceso privado</div>
+            <h1>Iniciar sesión</h1>
+            <p class="intro">
+                Introduce tu correo y tu contraseña para acceder a tus reservas.
+            </p>
+
+            <div th:if="${param.error}" class="alert error">
+                Usuario o contraseña incorrectos.
+            </div>
+
+            <div th:if="${param.logout}" class="alert ok">
+                Has cerrado sesión correctamente.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username" class="form-label">Email</label>
+                    <input type="text" id="username" name="username" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+
+                <button type="submit" class="submit-button">Entrar</button>
+            </form>
+
+            <div class="login-foot">
+                Coral Pilates Studio · Acceso seguro para clientes y administración
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
     <br>
 
     <div>
