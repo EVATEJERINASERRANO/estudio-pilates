@@ -46,10 +46,9 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
-
-                        .requestMatchers("/sesiones-web", "/reservas/**").hasAnyRole("CLIENTE", "ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/sesiones-web", "/reservas/**").hasRole("CLIENTE")
                         .requestMatchers("/clases/**", "/sesiones/**").hasRole("ADMIN")
-
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -57,7 +56,16 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/sesiones-web", true)
+                        .successHandler((request, response, authentication) -> {
+                            boolean esAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+
+                            if (esAdmin) {
+                                response.sendRedirect("/admin");
+                            } else {
+                                response.sendRedirect("/sesiones-web");
+                            }
+                        })
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )

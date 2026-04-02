@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservas admin</title>
+    <meta charset="UTF-8">
+    <style>
+        body{font-family:Arial,sans-serif;padding:30px;background:#f7f1eb;color:#4c4036;}
+        h1{margin-bottom:20px;}
+        table{width:100%;border-collapse:collapse;background:white;}
+        th,td{padding:12px;border:1px solid #ddd;text-align:left;}
+        th{background:#dcc6b4;}
+        a{display:inline-block;margin-bottom:20px;color:#6a5241;}
+    </style>
+</head>
+<body>
+<a th:href="@{/admin}">← Volver al panel admin</a>
+<h1>Reservas registradas</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID reserva</th>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Fecha sesión</th>
+        <th>Hora sesión</th>
+        <th>Fecha reserva</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reserva : ${reservas}">
+        <td th:text="${reserva.id}"></td>
+        <td th:text="${reserva.usuario != null ? reserva.usuario.nombre : 'Sin usuario'}"></td>
+        <td th:text="${reserva.usuario != null ? reserva.usuario.email : 'Sin email'}"></td>
+        <td th:text="${reserva.sesion != null ? reserva.sesion.fecha : 'Sin sesión'}"></td>
+        <td th:text="${reserva.sesion != null ? reserva.sesion.hora : 'Sin hora'}"></td>
+        <td th:text="${reserva.fechaReserva}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

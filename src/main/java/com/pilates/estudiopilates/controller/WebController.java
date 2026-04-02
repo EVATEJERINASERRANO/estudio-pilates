@@ -65,6 +65,41 @@ public class WebController {
         return "sesiones";
     }
 
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
+    @GetMapping("/admin/sesiones")
+    public String adminSesiones(Model model) {
+        List<Sesion> sesiones = sesionService.obtenerTodas();
+        List<Reserva> reservas = reservaService.obtenerTodas();
+
+        Map<LocalDate, List<Sesion>> sesionesPorDia = sesiones.stream()
+                .sorted(Comparator.comparing(Sesion::getFecha)
+                        .thenComparing(Sesion::getHora))
+                .collect(Collectors.groupingBy(
+                        Sesion::getFecha,
+                        TreeMap::new,
+                        Collectors.toList()
+                ));
+
+        Map<Long, List<Reserva>> reservasPorSesion = reservas.stream()
+                .filter(reserva -> reserva.getSesion() != null)
+                .collect(Collectors.groupingBy(reserva -> reserva.getSesion().getId()));
+
+        model.addAttribute("sesionesPorDia", sesionesPorDia);
+        model.addAttribute("reservasPorSesion", reservasPorSesion);
+
+        return "admin-sesiones";
+    }
+
+    @GetMapping("/admin/reservas")
+    public String adminReservas(Model model) {
+        model.addAttribute("reservas", reservaService.obtenerTodas());
+        return "admin-reservas";
+    }
+
     @GetMapping("/experiencias")
     public String experiencias() {
         return "experiencias";

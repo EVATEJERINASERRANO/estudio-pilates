@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agenda admin - Coral Pilates Studio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            color:#4c4036;
+            min-height:100vh;
+            background:
+                    radial-gradient(circle at top left, rgba(255,248,242,0.95), rgba(245,238,232,1) 45%),
+                    linear-gradient(180deg, #f7f1eb 0%, #efe5dc 100%);
+            padding:30px 20px;
+        }
+
+        .page-wrap{
+            width:92%;
+            max-width:1450px;
+            margin:0 auto;
+        }
+
+        .back-link{
+            display:inline-block;
+            margin-bottom:18px;
+            color:#7b604c;
+            text-decoration:none;
+            font-weight:700;
+        }
+
+        .head-card{
+            background:rgba(255,255,255,0.84);
+            border:1px solid rgba(191,160,133,0.18);
+            border-radius:30px;
+            padding:28px;
+            box-shadow:0 18px 34px rgba(89,66,49,0.08);
+            margin-bottom:24px;
+        }
+
+        .kicker{
+            font-family:'Nunito',sans-serif;
+            font-size:13px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#9b7c65;
+            margin-bottom:10px;
+            font-weight:700;
+        }
+
+        h1{
+            font-family:'Cormorant Garamond',serif;
+            font-size:54px;
+            line-height:0.95;
+            color:#4a3a30;
+            margin-bottom:12px;
+        }
+
+        .intro{
+            font-size:16px;
+            line-height:1.8;
+            color:#5b4b40;
+            max-width:900px;
+        }
+
+        .days-wrap{
+            display:flex;
+            flex-direction:column;
+            gap:24px;
+        }
+
+        .day-block{
+            background:rgba(255,255,255,0.84);
+            border:1px solid rgba(191,160,133,0.18);
+            border-radius:28px;
+            padding:24px;
+            box-shadow:0 14px 28px rgba(89,66,49,0.06);
+        }
+
+        .day-header{
+            margin-bottom:18px;
+            padding-bottom:14px;
+            border-bottom:1px solid rgba(191,160,133,0.18);
+        }
+
+        .day-name{
+            font-family:'Cormorant Garamond',serif;
+            font-size:38px;
+            color:#4a3a30;
+            text-transform:capitalize;
+            margin-bottom:6px;
+        }
+
+        .day-date{
+            color:#8a6b55;
+            font-size:15px;
+            text-transform:capitalize;
+        }
+
+        .sessions-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:18px;
+        }
+
+        .session-card{
+            background:linear-gradient(180deg, #fffdfb 0%, #fdf7f2 100%);
+            border:1px solid #eaded3;
+            border-radius:24px;
+            padding:20px;
+            box-shadow:0 10px 20px rgba(89,66,49,0.05);
+        }
+
+        .session-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            gap:16px;
+            margin-bottom:14px;
+        }
+
+        .session-hour{
+            font-family:'Nunito',sans-serif;
+            font-size:30px;
+            font-weight:800;
+            color:#4d3c30;
+            line-height:1;
+        }
+
+        .session-class{
+            font-size:14px;
+            color:#7f6451;
+            margin-top:6px;
+            font-weight:600;
+        }
+
+        .session-badge{
+            background:#dcc6b4;
+            color:#5a4537;
+            border-radius:999px;
+            padding:8px 12px;
+            font-size:12px;
+            font-weight:800;
+            white-space:nowrap;
+        }
+
+        .session-meta{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-bottom:16px;
+        }
+
+        .meta-box{
+            background:#fffaf6;
+            border:1px solid #eaded3;
+            border-radius:16px;
+            padding:12px;
+        }
+
+        .meta-label{
+            font-size:12px;
+            text-transform:uppercase;
+            letter-spacing:0.7px;
+            color:#8a6b55;
+            margin-bottom:4px;
+            font-weight:700;
+        }
+
+        .meta-value{
+            font-size:18px;
+            font-weight:800;
+            color:#4d3c30;
+        }
+
+        .attendees-title{
+            font-family:'Nunito',sans-serif;
+            font-size:14px;
+            font-weight:800;
+            color:#6b5648;
+            margin-bottom:10px;
+            text-transform:uppercase;
+            letter-spacing:0.7px;
+        }
+
+        .attendees-empty{
+            background:#fffaf6;
+            border:1px dashed #dbcbbb;
+            border-radius:16px;
+            padding:14px;
+            color:#8a6b55;
+            font-size:14px;
+        }
+
+        .attendees-list{
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+
+        .attendee-item{
+            background:#efe1d5;
+            border:1px solid rgba(122,90,68,0.10);
+            border-radius:16px;
+            padding:12px 14px;
+        }
+
+        .attendee-name{
+            font-weight:800;
+            color:#4d3c30;
+            margin-bottom:4px;
+        }
+
+        .attendee-email{
+            font-size:14px;
+            color:#7f6451;
+        }
+
+        @media (max-width: 900px){
+            h1{
+                font-size:44px;
+            }
+
+            .day-name{
+                font-size:32px;
+            }
+        }
+
+        @media (max-width: 768px){
+            .page-wrap{
+                width:95%;
+            }
+
+            .head-card,
+            .day-block{
+                padding:20px 16px;
+            }
+
+            .sessions-grid{
+                grid-template-columns:1fr;
+            }
+
+            .session-meta{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+    <a th:href="@{/admin}" class="back-link">← Volver al panel admin</a>
+
+    <section class="head-card">
+        <div class="kicker">Coral Pilates Studio</div>
+        <h1>Agenda admin</h1>
+        <p class="intro">
+            Consulta la agenda agrupada por días y revisa en cada sesión las plazas disponibles
+            y las personas que ya están apuntadas.
+        </p>
+    </section>
+
+    <section class="days-wrap">
+
+        <div th:each="entry : ${sesionesPorDia}" class="day-block">
+
+            <div class="day-header">
+                <div class="day-name"
+                     th:text="${#strings.capitalize(#temporals.format(entry.key, 'EEEE'))}">
+                    Lunes
+                </div>
+                <div class="day-date"
+                     th:text="${#strings.capitalize(#temporals.format(entry.key, 'd MMMM'))}">
+                    1 junio
+                </div>
+            </div>
+
+            <div class="sessions-grid">
+
+                <div th:each="sesion : ${entry.value}" class="session-card">
+
+                    <div class="session-top">
+                        <div>
+                            <div class="session-hour"
+                                 th:text="${#temporals.format(sesion.hora, 'HH:mm')}">
+                                18:00
+                            </div>
+                            <div class="session-class"
+                                 th:text="${sesion.clase != null ? sesion.clase.nombre : 'Sin clase'}">
+                                Pilates suelo
+                            </div>
+                        </div>
+
+                        <div class="session-badge">
+                            Sesión
+                        </div>
+                    </div>
+
+                    <div class="session-meta">
+                        <div class="meta-box">
+                            <div class="meta-label">Plazas disponibles</div>
+                            <div class="meta-value"
+                                 th:text="${sesion.plazasDisponibles}">
+                                3
+                            </div>
+                        </div>
+
+                        <div class="meta-box">
+                            <div class="meta-label">Reservas</div>
+                            <div class="meta-value"
+                                 th:text="${reservasPorSesion.containsKey(sesion.id) ? #lists.size(reservasPorSesion.get(sesion.id)) : 0}">
+                                0
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="attendees-title">Personas apuntadas</div>
+
+                    <div th:if="${!reservasPorSesion.containsKey(sesion.id)}" class="attendees-empty">
+                        Todavía no hay nadie apuntado en esta sesión.
+                    </div>
+
+                    <div th:if="${reservasPorSesion.containsKey(sesion.id)}" class="attendees-list">
+                        <div th:each="reserva : ${reservasPorSesion.get(sesion.id)}" class="attendee-item">
+                            <div class="attendee-name"
+                                 th:text="${reserva.usuario != null ? reserva.usuario.nombre : 'Usuario sin nombre'}">
+                                Nombre usuario
+                            </div>
+                            <div class="attendee-email"
+                                 th:text="${reserva.usuario != null ? reserva.usuario.email : 'Sin email'}">
+                                correo@ejemplo.com
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>
