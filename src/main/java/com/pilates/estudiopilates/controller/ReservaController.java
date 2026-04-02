@@ -1,7 +1,7 @@
 package com.pilates.estudiopilates.controller;
 
 import com.pilates.estudiopilates.model.Reserva;
-import com.pilates.estudiopilates.service.ReservaService;
+import com.pilates.estudiopilates.repository.ReservaService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;

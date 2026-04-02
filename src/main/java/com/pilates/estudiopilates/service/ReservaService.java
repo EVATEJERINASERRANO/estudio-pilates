@@ -1,11 +1,8 @@
-package com.pilates.estudiopilates.service;
+package com.pilates.estudiopilates.repository;
 
 import com.pilates.estudiopilates.model.Reserva;
 import com.pilates.estudiopilates.model.Sesion;
 import com.pilates.estudiopilates.model.Usuario;
-import com.pilates.estudiopilates.repository.ReservaRepository;
-import com.pilates.estudiopilates.repository.SesionRepository;
-import com.pilates.estudiopilates.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -69,6 +66,13 @@ public class ReservaService {
             );
         }
 
+        if (Boolean.TRUE.equals(sesion.getCancelada())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "No se puede reservar una sesión cancelada"
+            );
+        }
+
         if (sesion.getPlazasDisponibles() <= 0) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -122,5 +126,9 @@ public class ReservaService {
                 .stream()
                 .map(reserva -> reserva.getSesion().getId())
                 .collect(Collectors.toSet());
+    }
+
+    public boolean existenReservasParaSesion(Long sesionId) {
+        return reservaRepository.existsBySesionId(sesionId);
     }
 }

@@ -2,7 +2,7 @@ package com.pilates.estudiopilates.controller;
 
 import com.pilates.estudiopilates.model.Reserva;
 import com.pilates.estudiopilates.model.Sesion;
-import com.pilates.estudiopilates.service.ReservaService;
+import com.pilates.estudiopilates.repository.ReservaService;
 import com.pilates.estudiopilates.service.SesionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

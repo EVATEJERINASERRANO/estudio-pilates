@@ -1,6 +1,6 @@
 package com.pilates.estudiopilates.controller;
 
-import com.pilates.estudiopilates.service.ReservaService;
+import com.pilates.estudiopilates.repository.ReservaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

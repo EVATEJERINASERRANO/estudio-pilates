@@ -47,6 +47,14 @@
             margin-bottom:24px;
         }
 
+        .head-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            gap:18px;
+            flex-wrap:wrap;
+        }
+
         .kicker{
             font-family:'Nunito',sans-serif;
             font-size:13px;
@@ -70,6 +78,33 @@
             line-height:1.8;
             color:#5b4b40;
             max-width:900px;
+        }
+
+        .new-session-button{
+            display:inline-block;
+            padding:14px 20px;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5;
+            text-decoration:none;
+            font-family:'Nunito',sans-serif;
+            font-size:14px;
+            font-weight:800;
+            white-space:nowrap;
+        }
+
+        .alert{
+            margin-bottom:18px;
+            padding:14px 18px;
+            border-radius:16px;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .alert.ok{
+            background:#e8f3ea;
+            color:#315c38;
+            border:1px solid #cfe4d2;
         }
 
         .days-wrap{
@@ -120,6 +155,11 @@
             box-shadow:0 10px 20px rgba(89,66,49,0.05);
         }
 
+        .session-card.cancelada{
+            border:1px solid #d4a8a0;
+            background:linear-gradient(180deg, #fff8f7 0%, #fbeceb 100%);
+        }
+
         .session-top{
             display:flex;
             justify-content:space-between;
@@ -153,6 +193,11 @@
             white-space:nowrap;
         }
 
+        .session-badge.cancelada{
+            background:#d78f86;
+            color:#fffaf5;
+        }
+
         .session-meta{
             display:grid;
             grid-template-columns:1fr 1fr;
@@ -180,6 +225,53 @@
             font-size:18px;
             font-weight:800;
             color:#4d3c30;
+        }
+
+        .session-actions{
+            margin-bottom:16px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .edit-button,
+        .delete-button,
+        .cancel-button{
+            display:inline-block;
+            padding:10px 14px;
+            border-radius:999px;
+            text-decoration:none;
+            font-family:'Nunito',sans-serif;
+            font-size:13px;
+            font-weight:800;
+            border:none;
+            cursor:pointer;
+        }
+
+        .edit-button{
+            background:#eaded3;
+            color:#5a4537;
+        }
+
+        .delete-button{
+            background:#5a4537;
+            color:#fffaf5;
+        }
+
+        .cancel-button{
+            background:#c97f75;
+            color:#fffaf5;
+        }
+
+        .cancelled-message{
+            margin-bottom:16px;
+            background:#f8e8e5;
+            color:#9c3f33;
+            border:1px solid #efc8c2;
+            border-radius:16px;
+            padding:12px 14px;
+            font-size:14px;
+            font-weight:700;
         }
 
         .attendees-title{
@@ -261,13 +353,23 @@
 
     <a th:href="@{/admin}" class="back-link">← Volver al panel admin</a>
 
+    <div th:if="${mensajeOk}" class="alert ok">
+        <span th:text="${mensajeOk}"></span>
+    </div>
+
     <section class="head-card">
-        <div class="kicker">Coral Pilates Studio</div>
-        <h1>Agenda admin</h1>
-        <p class="intro">
-            Consulta la agenda agrupada por días y revisa en cada sesión las plazas disponibles
-            y las personas que ya están apuntadas.
-        </p>
+        <div class="head-top">
+            <div>
+                <div class="kicker">Coral Pilates Studio</div>
+                <h1>Agenda admin</h1>
+                <p class="intro">
+                    Consulta la agenda agrupada por días y revisa en cada sesión las plazas disponibles,
+                    las reservas registradas y las personas que ya están apuntadas.
+                </p>
+            </div>
+
+            <a th:href="@{/admin/sesiones/nueva}" class="new-session-button">Nueva sesión</a>
+        </div>
     </section>
 
     <section class="days-wrap">
@@ -287,7 +389,9 @@
 
             <div class="sessions-grid">
 
-                <div th:each="sesion : ${entry.value}" class="session-card">
+                <div th:each="sesion : ${entry.value}"
+                     class="session-card"
+                     th:classappend="${sesion.cancelada} ? ' cancelada' : ''">
 
                     <div class="session-top">
                         <div>
@@ -301,7 +405,9 @@
                             </div>
                         </div>
 
-                        <div class="session-badge">
+                        <div class="session-badge"
+                             th:classappend="${sesion.cancelada} ? ' cancelada' : ''"
+                             th:text="${sesion.cancelada ? 'Cancelada' : 'Sesión'}">
                             Sesión
                         </div>
                     </div>
@@ -322,6 +428,26 @@
                                 0
                             </div>
                         </div>
+                    </div>
+
+                    <div th:if="${sesion.cancelada}" class="cancelled-message">
+                        Esta sesión ha sido cancelada y ya no debería admitir nuevas reservas.
+                    </div>
+
+                    <div class="session-actions">
+                        <a th:href="@{/admin/sesiones/editar/{id}(id=${sesion.id})}" class="edit-button">
+                            Editar sesión
+                        </a>
+
+                        <form th:if="${!sesion.cancelada}"
+                              th:action="@{/admin/sesiones/eliminar/{id}(id=${sesion.id})}"
+                              method="post">
+                            <button type="submit"
+                                    th:class="${reservasPorSesion.containsKey(sesion.id) ? 'cancel-button' : 'delete-button'}"
+                                    th:text="${reservasPorSesion.containsKey(sesion.id) ? 'Cancelar' : 'Eliminar'}">
+                                Eliminar
+                            </button>
+                        </form>
                     </div>
 
                     <div class="attendees-title">Personas apuntadas</div>

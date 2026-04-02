@@ -16,7 +16,9 @@ public class Sesion {
 
     private LocalTime hora;
 
-    private Integer plazasDisponibles;
+    private Integer plazasDisponibles = 4;
+
+    private Boolean cancelada = false;
 
     @ManyToOne
     @JoinColumn(name = "clase_id")
@@ -24,8 +26,8 @@ public class Sesion {
 
     public Sesion() {
     }
-//getters y setters
-    public Sesion(LocalDate fecha, LocalTime hora, int plazasDisponibles, Clase clase) {
+
+    public Sesion(LocalDate fecha, LocalTime hora, Integer plazasDisponibles, Clase clase) {
         this.fecha = fecha;
         this.hora = hora;
         this.plazasDisponibles = plazasDisponibles;
@@ -52,11 +54,11 @@ public class Sesion {
         this.hora = hora;
     }
 
-    public int getPlazasDisponibles() {
+    public Integer getPlazasDisponibles() {
         return plazasDisponibles;
     }
 
-    public void setPlazasDisponibles(int plazasDisponibles) {
+    public void setPlazasDisponibles(Integer plazasDisponibles) {
         this.plazasDisponibles = plazasDisponibles;
     }
 
@@ -66,5 +68,13 @@ public class Sesion {
 
     public void setClase(Clase clase) {
         this.clase = clase;
+    }
+
+    public Boolean getCancelada() {
+        return cancelada;
+    }
+
+    public void setCancelada(Boolean cancelada) {
+        this.cancelada = cancelada;
     }
 }

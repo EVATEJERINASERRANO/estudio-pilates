@@ -10,4 +10,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     boolean existsByUsuarioIdAndSesionId(Long usuarioId, Long sesionId);
 
     List<Reserva> findByUsuarioEmailOrderBySesionFechaAscSesionHoraAsc(String email);
+
+    boolean existsBySesionId(Long sesionId);
 }
