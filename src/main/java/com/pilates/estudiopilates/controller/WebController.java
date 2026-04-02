@@ -1,9 +1,17 @@
 package com.pilates.estudiopilates.controller;
 
+import com.pilates.estudiopilates.model.Sesion;
 import com.pilates.estudiopilates.service.SesionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
@@ -21,7 +29,19 @@ public class WebController {
 
     @GetMapping("/sesiones-web")
     public String sesionesWeb(Model model) {
-        model.addAttribute("sesiones", sesionService.obtenerTodas());
+        List<Sesion> sesiones = sesionService.obtenerTodas();
+
+        Map<LocalDate, List<Sesion>> sesionesPorDia = sesiones.stream()
+                .sorted(Comparator.comparing(Sesion::getFecha)
+                        .thenComparing(Sesion::getHora))
+                .collect(Collectors.groupingBy(
+                        Sesion::getFecha,
+                        TreeMap::new,
+                        Collectors.toList()
+                ));
+
+        model.addAttribute("sesionesPorDia", sesionesPorDia);
+
         return "sesiones";
     }
 
