@@ -9,87 +9,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Reset básico de esta vista */
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        /* Aquí dejo solo el fondo de esta página porque es propio de experiencias */
+        /* Fondo propio de esta página */
         body{
             background:#e8ddd2;
         }
 
-        /* Los enlaces siguen sin subrayado en esta vista */
-        a{
-            text-decoration:none;
-        }
-
-        /* Este header es propio de esta página porque aquí lo tengo sticky
-           y con una barra distinta a otras vistas */
-        header{
-            position:sticky;
-            top:0;
-            z-index:1000;
-            background:#eee2d7;
-            border-bottom:1px solid #d5c5b6;
-            box-shadow:0 3px 10px rgba(0,0,0,0.03);
-        }
-
-        /* La navbar de esta vista tiene un ancho y una altura concretos */
-        .navbar{
-            width:95%;
-            max-width:1500px;
-            margin:auto;
-            min-height:110px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:28px;
-        }
-
-        /* Aquí mantengo el tamaño del logo de esta página */
-        .logo img{
-            height:95px;
-            width:auto;
-        }
-
-        /* En experiencias el menú está más grande que en otras páginas,
-           por eso lo dejo aquí y no en el css general */
-        .menu{
-            display:flex;
-            align-items:center;
-            gap:28px;
-            margin-left:auto;
-            flex-wrap:wrap;
-        }
-
-        .menu a{
-            font-family:'Nunito',sans-serif;
-            font-size:19px;
-            font-weight:700;
-            color:#6f5441;
-            position:relative;
-        }
-
-        /* Subrayado suave al pasar el ratón */
-        .menu a::after{
-            content:"";
-            position:absolute;
-            left:0;
-            bottom:-6px;
-            width:0;
-            height:2px;
-            background:#b28e73;
-            transition:0.3s;
-        }
-
-        .menu a:hover::after{
-            width:100%;
-        }
-
-        /* Bloque principal de experiencias */
+        /* Bloque principal */
         .experiencias-section{
             width:90%;
             max-width:1400px;
@@ -112,14 +37,14 @@
             font-size:18px;
         }
 
-        /* Cuadrícula de tarjetas */
+        /* Grid */
         .experiencias-grid{
             display:grid;
             grid-template-columns:repeat(3, 1fr);
             gap:25px;
         }
 
-        /* Tarjeta individual */
+        /* Tarjetas */
         .card{
             border-radius:30px;
             overflow:hidden;
@@ -149,7 +74,6 @@
             transform:scale(1.03);
         }
 
-        /* Capa que aparece al pasar el ratón */
         .card-overlay{
             position:absolute;
             inset:0;
@@ -170,15 +94,6 @@
             font-size:30px;
             text-align:center;
             padding:0 20px;
-        }
-
-        /* El footer aquí solo necesita color de fondo y separación.
-           El estilo del texto y del enlace de Instagram ya viene del style.css */
-        footer{
-            background:#dac9ba;
-            padding:25px;
-            text-align:center;
-            margin-top:20px;
         }
     </style>
 </head>
@@ -213,42 +128,42 @@
 
         <div class="card" onclick="openModal('/images/exp1.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp1.png}" alt="Experiencia Vitality">
+                <img th:src="@{/images/exp1.png}">
             </div>
             <div class="card-overlay"><span>Vitality</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp2.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp2.png}" alt="Experiencia Sweet Balance">
+                <img th:src="@{/images/exp2.png}">
             </div>
             <div class="card-overlay"><span>Sweet Balance</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp3.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp3.png}" alt="Experiencia Wine & Cheese Flow">
+                <img th:src="@{/images/exp3.png}">
             </div>
             <div class="card-overlay"><span>Wine & Cheese Flow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp4.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp4.png}" alt="Experiencia Relax Serenity">
+                <img th:src="@{/images/exp4.png}">
             </div>
             <div class="card-overlay"><span>Relax Serenity</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp5.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp5.png}" alt="Experiencia Brunch Glow">
+                <img th:src="@{/images/exp5.png}">
             </div>
             <div class="card-overlay"><span>Brunch Glow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp6.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp6.png}" alt="Experiencia Duo Exclusive">
+                <img th:src="@{/images/exp6.png}">
             </div>
             <div class="card-overlay"><span>Duo Exclusive</span></div>
         </div>

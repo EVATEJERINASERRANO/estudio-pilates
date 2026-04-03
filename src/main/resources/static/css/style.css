@@ -1,12 +1,25 @@
 /* =======================================================
-   FUENTES Y BASE GENERAL
+   BASE GENERAL
    Aquí dejo lo común de toda la web para no repetirlo
+   en cada html. La idea es que esto sea la base visual
+   compartida y luego cada página tenga solo lo suyo.
    ======================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 body{
     font-family:'Inter', sans-serif;
     color:#4c4036;
     margin:0;
+}
+
+/* Los enlaces de la parte pública van sin subrayado */
+a{
+    text-decoration:none;
 }
 
 /* Títulos principales con la tipografía elegante */
@@ -22,126 +35,150 @@ button,
 
 
 /* =======================================================
-   CABECERA (HEADER)
-   Esto se usa en varias páginas → va global
+   CABECERA PÚBLICA
+   Esto ya coincide con las páginas públicas actuales:
+   index, conocenos, experiencias, contacto y boutique.
    ======================================================= */
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 40px;
-    background-color: #f1e7dd;
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#eee2d7;
+    border-bottom:1px solid #d5c5b6;
+    box-shadow:0 3px 10px rgba(0,0,0,0.03);
 }
 
-/* Logo controlado para que no cambie tamaño raro */
-.logo img {
-    width: 120px;
-    height: auto;
+.navbar{
+    width:95%;
+    max-width:1500px;
+    margin:auto;
+    min-height:110px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
 }
 
-/* Menú horizontal */
-.menu {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+/* El logo se deja estable para que no cambie raro */
+.logo{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
 }
 
-/* Enlaces del menú */
-.menu a {
-    text-decoration: none;
-    color: #6b5242;
-    font-weight: 600;
-    font-size: 16px;
+.logo img{
+    height:95px;
+    width:auto;
+    object-fit:contain;
+    display:block;
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
 }
 
-/* Botón de login destacado */
-.login-link {
-    background-color: #c7a68a;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 25px;
+/* Menú principal de navegación */
+.menu{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+    margin-left:auto;
+}
+
+.menu a{
+    font-family:'Nunito', sans-serif;
+    font-size:19px;
+    font-weight:700;
+    color:#6f5441;
+    position:relative;
+    transition:color 0.25s ease, transform 0.25s ease;
+}
+
+.menu a:hover{
+    color:#8c6a52;
+    transform:translateY(-1px);
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:#b28e73;
+    transition:width 0.25s ease;
+}
+
+.menu a:hover::after{
+    width:100%;
 }
 
 
 /* =======================================================
-   FOOTER / ZONA FINAL
-   Para unificar lo de Instagram y copyright
+   FOOTER / PARTE FINAL
+   Esto sirve para dejar igual el copyright y el enlace
+   de Instagram en las páginas públicas.
    ======================================================= */
 
-.footer{
+footer{
+    background:#dac9ba;
+    padding:25px;
     text-align:center;
-    margin-top:40px;
-    padding:20px;
+    margin-top:24px;
+}
+
+.footer{
     font-family:'Nunito', sans-serif;
     color:#7b604c;
 }
 
-/* Link de Instagram más integrado con el diseño */
-.footer a{
+.instagram-link{
     display:inline-block;
     margin-top:6px;
-    text-decoration:none;
     color:#b9987f;
     font-weight:700;
     transition:all 0.2s ease;
 }
 
-.footer a:hover{
+.instagram-link:hover{
     color:#8a6b55;
 }
 
 
 /* =======================================================
-   CONÓCENOS (lo dejo aquí porque ya lo tienes montado)
-   Si en el futuro quieres, esto se podría separar
+   AJUSTES RESPONSIVE COMUNES
+   Esto también se repite bastante en la parte pública,
+   así que ya lo dejo centralizado aquí.
    ======================================================= */
 
-.conocenos-main {
-    background-color: #efe6dc;
-    padding: 30px 0 60px;
+@media (max-width: 1100px){
+    .navbar{
+        padding:16px 0;
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    .logo img{
+        height:85px;
+    }
+
+    .menu{
+        justify-content:center;
+        margin-left:0;
+        gap:18px;
+    }
+
+    .menu a{
+        font-size:17px;
+    }
 }
 
-/* Contenedor principal con imagen y caja encima */
-.conocenos-hero {
-    width: 92%;
-    margin: 0 auto;
-    position: relative;
-    border-radius: 35px;
-    overflow: hidden;
-}
+@media (max-width: 600px){
+    .menu{
+        gap:14px;
+    }
 
-/* Imagen grande */
-.conocenos-img {
-    width: 100%;
-    height: 620px;
-    object-fit: cover;
-    display: block;
-}
-
-/* Caja de texto sobre la imagen */
-.conocenos-box {
-    position: absolute;
-    right: 70px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 248, 244, 0.90);
-    padding: 45px;
-    border-radius: 30px;
-    max-width: 520px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
-}
-
-/* Título */
-.conocenos-box h1 {
-    font-size: 64px;
-    margin-bottom: 20px;
-    color: #5c4334;
-}
-
-/* Texto */
-.conocenos-box p {
-    font-size: 26px;
-    line-height: 1.5;
-    color: #6b5648;
+    .menu a{
+        font-size:16px;
+    }
 }

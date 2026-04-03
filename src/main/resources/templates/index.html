@@ -12,69 +12,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Reset básico de esta vista */
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        /*  fondo de la home  */
+        /* Fondo propio de la home */
         body{
             background:#e8ddd2;
-        }
-
-        /* Enlaces sin subrayado en esta vista */
-        a{
-            text-decoration:none;
-        }
-
-        /* Este header lo dejo aquí porque en index tiene este comportamiento sticky
-           y esta barra concreta */
-        header{
-            position:sticky;
-            top:0;
-            z-index:1000;
-            background:#eee2d7;
-            border-bottom:1px solid #d5c5b6;
-            box-shadow:0 3px 10px rgba(0,0,0,0.03);
-        }
-
-        /* Navbar concreta de la home */
-        .navbar{
-            width:95%;
-            max-width:1500px;
-            margin:auto;
-            min-height:110px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:28px;
-        }
-
-        /* Aquí el logo va más grande y por eso lo dejo en esta página */
-        .logo img{
-            height:95px;
-            width:auto;
-        }
-
-        /* Menú propio de esta vista */
-        .menu{
-            display:flex;
-            gap:28px;
-            margin-left:auto;
-            align-items:center;
-        }
-
-        .menu a{
-            font-family:'Nunito',sans-serif;
-            font-size:19px;
-            font-weight:700;
-            color:#6f5441;
-        }
-
-        .menu a:hover{
-            color:#8c6a52;
         }
 
         /* Hero principal de la home */
@@ -118,18 +58,10 @@
             border-radius:25px;
         }
 
-        /* En esta home el h1 principal tiene este tamaño concreto */
-        h1{
+        /* El h1 de esta caja principal va más grande en la home */
+        .hero-content h1{
             font-size:54px;
             margin-bottom:15px;
-        }
-
-        /* El footer aquí solo necesita fondo y espaciado.
-           El estilo del texto y del Instagram ya viene del style.css */
-        footer{
-            background:#dac9ba;
-            padding:25px;
-            text-align:center;
         }
     </style>
 </head>

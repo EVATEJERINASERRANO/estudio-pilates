@@ -10,97 +10,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Reset básico de esta vista */
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
         /* Fondo general de esta página */
         body{
             background:#e8ddd2;
-        }
-
-        /* Enlaces sin subrayado en esta vista */
-        a{
-            text-decoration:none;
-        }
-
-        /* Este header se queda aquí porque en boutique tiene sticky,
-           sombra y el mismo comportamiento visual que las otras vistas públicas */
-        header{
-            position:sticky;
-            top:0;
-            z-index:1000;
-            background:#eee2d7;
-            border-bottom:1px solid #d5c5b6;
-            box-shadow:0 3px 10px rgba(0,0,0,0.03);
-        }
-
-        /* Navbar concreta de esta vista */
-        .navbar{
-            width:95%;
-            max-width:1500px;
-            margin:auto;
-            min-height:110px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:28px;
-        }
-
-        /* Aquí el logo tiene su tamaño y tratamiento de esta página */
-        .logo{
-            display:flex;
-            align-items:center;
-            flex-shrink:0;
-        }
-
-        .logo img{
-            height:95px;
-            width:auto;
-            object-fit:contain;
-            display:block;
-            filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
-        }
-
-        /* Menú de esta vista */
-        .menu{
-            display:flex;
-            align-items:center;
-            gap:28px;
-            flex-wrap:wrap;
-            margin-left:auto;
-        }
-
-        .menu a{
-            font-family:'Nunito',sans-serif;
-            font-size:19px;
-            font-weight:700;
-            color:#6f5441;
-            position:relative;
-            transition:color 0.25s ease, transform 0.25s ease;
-        }
-
-        .menu a:hover{
-            color:#8c6a52;
-            transform:translateY(-1px);
-        }
-
-        .menu a::after{
-            content:"";
-            position:absolute;
-            left:0;
-            bottom:-6px;
-            width:0;
-            height:2px;
-            background:#b28e73;
-            transition:width 0.25s ease;
-        }
-
-        .menu a:hover::after{
-            width:100%;
         }
 
         /* Bloque principal superior */
@@ -167,7 +79,7 @@
             margin-bottom:14px;
         }
 
-        /* Muestras de color de la colección */
+        /* Muestras de color */
         .swatches{
             display:flex;
             align-items:center;
@@ -197,7 +109,7 @@
         .swatch-black{ background:#1f1f1f; }
         .swatch-beige{ background:#d7c2ad; }
 
-        /* Galería de imágenes */
+        /* Galería */
         .gallery-section{
             width:90%;
             max-width:1400px;
@@ -246,7 +158,7 @@
             transform:scale(1.03);
         }
 
-        /* Catálogo con prendas y accesorios */
+        /* Catálogo */
         .catalog-section{
             width:90%;
             max-width:1100px;
@@ -341,40 +253,9 @@
             line-height:1;
         }
 
-        /* El footer aquí solo necesita fondo y separación.
-           El texto y el Instagram ya los controla style.css */
-        footer{
-            background:#dac9ba;
-            padding:25px;
-            text-align:center;
-            margin-top:24px;
-        }
-
         @media (max-width: 1200px){
             .boutique-hero{
                 grid-template-columns:1fr;
-            }
-        }
-
-        @media (max-width: 1100px){
-            .navbar{
-                padding:16px 0;
-                flex-direction:column;
-                justify-content:center;
-            }
-
-            .logo img{
-                height:85px;
-            }
-
-            .menu{
-                justify-content:center;
-                margin-left:0;
-                gap:18px;
-            }
-
-            .menu a{
-                font-size:17px;
             }
         }
 
@@ -406,14 +287,6 @@
         }
 
         @media (max-width: 600px){
-            .menu{
-                gap:14px;
-            }
-
-            .menu a{
-                font-size:16px;
-            }
-
             .boutique-hero,
             .gallery-section,
             .catalog-section{
