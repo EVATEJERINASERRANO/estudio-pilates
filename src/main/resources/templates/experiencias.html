@@ -6,102 +6,174 @@
     <title>Experiencias - Coral Pilates Studio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Inter',sans-serif;background:#e8ddd2;color:#4c4036;}
-        a{text-decoration:none;}
+        /* Reset básico de esta vista */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
+        /* Aquí dejo solo el fondo de esta página porque es propio de experiencias */
+        body{
+            background:#e8ddd2;
+        }
+
+        /* Los enlaces siguen sin subrayado en esta vista */
+        a{
+            text-decoration:none;
+        }
+
+        /* Este header es propio de esta página porque aquí lo tengo sticky
+           y con una barra distinta a otras vistas */
         header{
-            position:sticky;top:0;z-index:1000;
-            background:#eee2d7;border-bottom:1px solid #d5c5b6;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#eee2d7;
+            border-bottom:1px solid #d5c5b6;
             box-shadow:0 3px 10px rgba(0,0,0,0.03);
         }
 
+        /* La navbar de esta vista tiene un ancho y una altura concretos */
         .navbar{
-            width:95%;max-width:1500px;margin:auto;
-            min-height:110px;display:flex;
-            align-items:center;justify-content:space-between;gap:28px;
+            width:95%;
+            max-width:1500px;
+            margin:auto;
+            min-height:110px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:28px;
         }
 
-        .logo img{height:95px;}
+        /* Aquí mantengo el tamaño del logo de esta página */
+        .logo img{
+            height:95px;
+            width:auto;
+        }
 
+        /* En experiencias el menú está más grande que en otras páginas,
+           por eso lo dejo aquí y no en el css general */
         .menu{
-            display:flex;align-items:center;
-            gap:28px;margin-left:auto;flex-wrap:wrap;
+            display:flex;
+            align-items:center;
+            gap:28px;
+            margin-left:auto;
+            flex-wrap:wrap;
         }
 
         .menu a{
             font-family:'Nunito',sans-serif;
-            font-size:19px;font-weight:700;
-            color:#6f5441;position:relative;
+            font-size:19px;
+            font-weight:700;
+            color:#6f5441;
+            position:relative;
         }
 
+        /* Subrayado suave al pasar el ratón */
         .menu a::after{
-            content:"";position:absolute;
-            left:0;bottom:-6px;width:0;height:2px;
-            background:#b28e73;transition:0.3s;
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:2px;
+            background:#b28e73;
+            transition:0.3s;
         }
 
-        .menu a:hover::after{width:100%;}
+        .menu a:hover::after{
+            width:100%;
+        }
 
+        /* Bloque principal de experiencias */
         .experiencias-section{
-            width:90%;max-width:1400px;margin:50px auto;
+            width:90%;
+            max-width:1400px;
+            margin:50px auto;
         }
 
-        .experiencias-title{text-align:center;margin-bottom:30px;}
+        .experiencias-title{
+            text-align:center;
+            margin-bottom:30px;
+        }
 
         .experiencias-title h1{
-            font-family:'Cormorant Garamond',serif;
-            font-size:64px;color:#4a3a30;margin-bottom:8px;
+            font-size:64px;
+            color:#4a3a30;
+            margin-bottom:8px;
         }
 
-        .experiencias-title p{color:#6b5648;font-size:18px;}
+        .experiencias-title p{
+            color:#6b5648;
+            font-size:18px;
+        }
 
+        /* Cuadrícula de tarjetas */
         .experiencias-grid{
             display:grid;
             grid-template-columns:repeat(3, 1fr);
             gap:25px;
         }
 
+        /* Tarjeta individual */
         .card{
-            border-radius:30px;overflow:hidden;
+            border-radius:30px;
+            overflow:hidden;
             box-shadow:0 15px 30px rgba(0,0,0,0.08);
-            position:relative;background:#f4ece4;
+            position:relative;
+            background:#f4ece4;
             cursor:pointer;
         }
 
         .card-image{
-            width:100%;height:560px;
-            display:flex;align-items:center;justify-content:center;
+            width:100%;
+            height:560px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
             padding:10px;
         }
 
         .card img{
-            width:100%;height:100%;
+            width:100%;
+            height:100%;
             object-fit:contain;
             transition:transform 0.35s ease;
         }
 
-        .card:hover img{transform:scale(1.03);}
-
-        .card-overlay{
-            position:absolute;inset:0;
-            background:rgba(0,0,0,0.28);
-            display:flex;align-items:center;justify-content:center;
-            opacity:0;transition:0.3s;
+        .card:hover img{
+            transform:scale(1.03);
         }
 
-        .card:hover .card-overlay{opacity:1;}
+        /* Capa que aparece al pasar el ratón */
+        .card-overlay{
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,0.28);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            transition:0.3s;
+        }
+
+        .card:hover .card-overlay{
+            opacity:1;
+        }
 
         .card-overlay span{
             color:white;
-            font-family:'Cormorant Garamond',serif;
             font-size:30px;
             text-align:center;
             padding:0 20px;
         }
 
+        /* El footer aquí solo necesita color de fondo y separación.
+           El estilo del texto y del enlace de Instagram ya viene del style.css */
         footer{
             background:#dac9ba;
             padding:25px;
@@ -119,7 +191,6 @@
             <img th:src="@{/images/logo.png}" alt="Logo">
         </div>
 
-        <!-- 🔥 MENÚ LIMPIO -->
         <nav class="menu">
             <a th:href="@{/}">Inicio</a>
             <a th:href="@{/conocenos}">Conócenos</a>
@@ -142,42 +213,42 @@
 
         <div class="card" onclick="openModal('/images/exp1.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp1.png}">
+                <img th:src="@{/images/exp1.png}" alt="Experiencia Vitality">
             </div>
             <div class="card-overlay"><span>Vitality</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp2.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp2.png}">
+                <img th:src="@{/images/exp2.png}" alt="Experiencia Sweet Balance">
             </div>
             <div class="card-overlay"><span>Sweet Balance</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp3.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp3.png}">
+                <img th:src="@{/images/exp3.png}" alt="Experiencia Wine & Cheese Flow">
             </div>
             <div class="card-overlay"><span>Wine & Cheese Flow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp4.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp4.png}">
+                <img th:src="@{/images/exp4.png}" alt="Experiencia Relax Serenity">
             </div>
             <div class="card-overlay"><span>Relax Serenity</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp5.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp5.png}">
+                <img th:src="@{/images/exp5.png}" alt="Experiencia Brunch Glow">
             </div>
             <div class="card-overlay"><span>Brunch Glow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp6.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp6.png}">
+                <img th:src="@{/images/exp6.png}" alt="Experiencia Duo Exclusive">
             </div>
             <div class="card-overlay"><span>Duo Exclusive</span></div>
         </div>
@@ -186,7 +257,7 @@
 
 </section>
 
-<footer>
+<footer class="footer">
     <p>© Coral Pilates Studio</p>
     <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
         Instagram

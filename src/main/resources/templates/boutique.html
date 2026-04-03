@@ -7,24 +7,28 @@
     <title>Boutique - Coral Pilates Studio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
+        /* Reset básico de esta vista */
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
         }
 
+        /* Fondo general de esta página */
         body{
-            font-family:'Inter',sans-serif;
             background:#e8ddd2;
-            color:#4c4036;
         }
 
+        /* Enlaces sin subrayado en esta vista */
         a{
             text-decoration:none;
         }
 
+        /* Este header se queda aquí porque en boutique tiene sticky,
+           sombra y el mismo comportamiento visual que las otras vistas públicas */
         header{
             position:sticky;
             top:0;
@@ -34,6 +38,7 @@
             box-shadow:0 3px 10px rgba(0,0,0,0.03);
         }
 
+        /* Navbar concreta de esta vista */
         .navbar{
             width:95%;
             max-width:1500px;
@@ -45,6 +50,7 @@
             gap:28px;
         }
 
+        /* Aquí el logo tiene su tamaño y tratamiento de esta página */
         .logo{
             display:flex;
             align-items:center;
@@ -59,6 +65,7 @@
             filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
         }
 
+        /* Menú de esta vista */
         .menu{
             display:flex;
             align-items:center;
@@ -96,6 +103,7 @@
             width:100%;
         }
 
+        /* Bloque principal superior */
         .boutique-hero{
             width:90%;
             max-width:1400px;
@@ -146,7 +154,6 @@
         }
 
         .hero-copy h1{
-            font-family:'Cormorant Garamond',serif;
             font-size:64px;
             line-height:0.95;
             color:#4a3a30;
@@ -160,6 +167,7 @@
             margin-bottom:14px;
         }
 
+        /* Muestras de color de la colección */
         .swatches{
             display:flex;
             align-items:center;
@@ -189,6 +197,7 @@
         .swatch-black{ background:#1f1f1f; }
         .swatch-beige{ background:#d7c2ad; }
 
+        /* Galería de imágenes */
         .gallery-section{
             width:90%;
             max-width:1400px;
@@ -201,7 +210,6 @@
         }
 
         .section-title h2{
-            font-family:'Cormorant Garamond',serif;
             font-size:52px;
             color:#4a3a30;
             margin-bottom:8px;
@@ -238,6 +246,7 @@
             transform:scale(1.03);
         }
 
+        /* Catálogo con prendas y accesorios */
         .catalog-section{
             width:90%;
             max-width:1100px;
@@ -257,7 +266,6 @@
         }
 
         .catalog-group h3{
-            font-family:'Cormorant Garamond',serif;
             font-size:42px;
             color:#4a3a30;
             margin-bottom:16px;
@@ -298,6 +306,7 @@
             flex-wrap:wrap;
         }
 
+        /* Modal para ampliar imágenes */
         .image-modal{
             display:none;
             position:fixed;
@@ -332,18 +341,13 @@
             line-height:1;
         }
 
+        /* El footer aquí solo necesita fondo y separación.
+           El texto y el Instagram ya los controla style.css */
         footer{
             background:#dac9ba;
             padding:25px;
             text-align:center;
             margin-top:24px;
-        }
-
-        .instagram-link{
-            color:#7a5f4b;
-            margin-top:10px;
-            display:inline-block;
-            font-weight:600;
         }
 
         @media (max-width: 1200px){
@@ -573,7 +577,7 @@
     </div>
 </section>
 
-<footer>
+<footer class="footer">
     <p>© Coral Pilates Studio</p>
     <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
         Instagram

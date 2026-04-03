@@ -7,24 +7,28 @@
     <title>Contacto - Coral Pilates Studio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
+        /* Reset básico de esta vista */
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
         }
 
+        /* El fondo general de contacto lo dejo aquí porque es propio de esta página */
         body{
-            font-family:'Inter',sans-serif;
             background:#e8ddd2;
-            color:#4c4036;
         }
 
+        /* Enlaces sin subrayado en esta vista */
         a{
             text-decoration:none;
         }
 
+        /* Este header se queda aquí porque en esta página tiene
+           sticky, sombra y comportamiento propio */
         header{
             position:sticky;
             top:0;
@@ -34,6 +38,7 @@
             box-shadow:0 3px 10px rgba(0,0,0,0.03);
         }
 
+        /* Navbar concreta de esta vista */
         .navbar{
             width:95%;
             max-width:1500px;
@@ -45,6 +50,8 @@
             gap:28px;
         }
 
+        /* Aquí el logo tiene un tratamiento un poco más cuidado,
+           con sombra suave */
         .logo{
             display:flex;
             align-items:center;
@@ -59,6 +66,7 @@
             filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
         }
 
+        /* Menú de esta página */
         .menu{
             display:flex;
             align-items:center;
@@ -96,6 +104,7 @@
             width:100%;
         }
 
+        /* Bloque superior con imagen y texto */
         .contact-hero{
             width:90%;
             max-width:1400px;
@@ -140,7 +149,6 @@
         }
 
         .contact-hero-copy h1{
-            font-family:'Cormorant Garamond',serif;
             font-size:52px;
             line-height:0.95;
             color:#4a3a30;
@@ -154,6 +162,7 @@
             margin-bottom:10px;
         }
 
+        /* Contenido principal con formulario y mapa */
         .contacto-main{
             width:90%;
             max-width:1400px;
@@ -173,7 +182,6 @@
         }
 
         .section-heading{
-            font-family:'Cormorant Garamond',serif;
             font-size:42px;
             color:#4a3a30;
             margin-bottom:16px;
@@ -277,18 +285,13 @@
             display:block;
         }
 
+        /* El footer aquí solo necesita fondo y separación.
+           El texto y el Instagram ya los controla style.css */
         footer{
             background:#dac9ba;
             padding:25px;
             text-align:center;
             margin-top:24px;
-        }
-
-        .instagram-link{
-            color:#7a5f4b;
-            margin-top:10px;
-            display:inline-block;
-            font-weight:600;
         }
 
         @media (max-width: 1200px){
@@ -470,7 +473,7 @@
     </div>
 </section>
 
-<footer>
+<footer class="footer">
     <p>© Coral Pilates Studio</p>
     <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
         Instagram
