@@ -1,20 +1,80 @@
 <!DOCTYPE html>
 <html lang="es"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coral Pilates Studio</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- head común -->
+    <th:block th:replace="fragments/head :: head"></th:block>
 
     <style>
+        /* Reset básico de esta vista */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        /* fondo de la home */
         body{
             background:#e8ddd2;
         }
 
+        /* enlaces */
+        a{
+            text-decoration:none;
+        }
+
+        /* header propio de esta página */
+        header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#eee2d7;
+            border-bottom:1px solid #d5c5b6;
+            box-shadow:0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        /* navbar */
+        .navbar{
+            width:95%;
+            max-width:1500px;
+            margin:auto;
+            min-height:110px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:28px;
+        }
+
+        /* logo */
+        .logo img{
+            height:95px;
+            width:auto;
+        }
+
+        /* menú */
+        .menu{
+            display:flex;
+            gap:28px;
+            margin-left:auto;
+            align-items:center;
+        }
+
+        .menu a{
+            font-family:'Nunito',sans-serif;
+            font-size:19px;
+            font-weight:700;
+            color:#6f5441;
+        }
+
+        .menu a:hover{
+            color:#8c6a52;
+        }
+
+        /* hero */
         .hero{
             width:90%;
             max-width:1400px;
@@ -58,13 +118,36 @@
             font-size:54px;
             margin-bottom:15px;
         }
+
+        /* footer */
+        footer{
+            background:#dac9ba;
+            padding:25px;
+            text-align:center;
+        }
     </style>
 </head>
 
 <body>
 
-<!-- 🔥 HEADER REUTILIZADO -->
-<div th:replace="fragments/header :: header"></div>
+<header>
+    <div class="navbar">
+
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Logo">
+        </div>
+
+        <nav class="menu">
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/conocenos}">Conócenos</a>
+            <a th:href="@{/experiencias}">Experiencias</a>
+            <a th:href="@{/login}">Reservas</a>
+            <a th:href="@{/boutique}">Boutique</a>
+            <a th:href="@{/contacto}">Contacto</a>
+        </nav>
+
+    </div>
+</header>
 
 <section class="hero">
     <div class="hero-left" id="heroLeft"></div>
@@ -78,8 +161,12 @@
     </div>
 </section>
 
-<!-- 🔥 FOOTER REUTILIZADO -->
-<div th:replace="fragments/footer :: footer"></div>
+<footer class="footer">
+    <p>© Coral Pilates Studio</p>
+    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+        Instagram
+    </a>
+</footer>
 
 <script>
     const images = [
