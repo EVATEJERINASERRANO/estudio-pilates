@@ -9,12 +9,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Fondo propio de esta página */
         body{
             background:#e8ddd2;
         }
 
-        /* Bloque principal */
         .experiencias-section{
             width:90%;
             max-width:1400px;
@@ -37,14 +35,12 @@
             font-size:18px;
         }
 
-        /* Grid */
         .experiencias-grid{
             display:grid;
             grid-template-columns:repeat(3, 1fr);
             gap:25px;
         }
 
-        /* Tarjetas */
         .card{
             border-radius:30px;
             overflow:hidden;
@@ -100,22 +96,7 @@
 
 <body>
 
-<header>
-    <div class="navbar">
-        <div class="logo">
-            <img th:src="@{/images/logo.png}" alt="Logo">
-        </div>
-
-        <nav class="menu">
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/conocenos}">Conócenos</a>
-            <a th:href="@{/experiencias}">Experiencias</a>
-            <a th:href="@{/login}">Reservas</a>
-            <a th:href="@{/boutique}">Boutique</a>
-            <a th:href="@{/contacto}">Contacto</a>
-        </nav>
-    </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <section class="experiencias-section">
 
@@ -128,42 +109,42 @@
 
         <div class="card" onclick="openModal('/images/exp1.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp1.png}">
+                <img th:src="@{/images/exp1.png}" alt="Experiencia Vitality">
             </div>
             <div class="card-overlay"><span>Vitality</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp2.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp2.png}">
+                <img th:src="@{/images/exp2.png}" alt="Experiencia Sweet Balance">
             </div>
             <div class="card-overlay"><span>Sweet Balance</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp3.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp3.png}">
+                <img th:src="@{/images/exp3.png}" alt="Experiencia Wine & Cheese Flow">
             </div>
             <div class="card-overlay"><span>Wine & Cheese Flow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp4.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp4.png}">
+                <img th:src="@{/images/exp4.png}" alt="Experiencia Relax Serenity">
             </div>
             <div class="card-overlay"><span>Relax Serenity</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp5.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp5.png}">
+                <img th:src="@{/images/exp5.png}" alt="Experiencia Brunch Glow">
             </div>
             <div class="card-overlay"><span>Brunch Glow</span></div>
         </div>
 
         <div class="card" onclick="openModal('/images/exp6.png')">
             <div class="card-image">
-                <img th:src="@{/images/exp6.png}">
+                <img th:src="@{/images/exp6.png}" alt="Experiencia Duo Exclusive">
             </div>
             <div class="card-overlay"><span>Duo Exclusive</span></div>
         </div>
@@ -172,12 +153,7 @@
 
 </section>
 
-<footer class="footer">
-    <p>© Coral Pilates Studio</p>
-    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
-        Instagram
-    </a>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

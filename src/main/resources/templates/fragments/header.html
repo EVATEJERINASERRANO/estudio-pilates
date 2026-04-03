@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="header">
+  <div class="navbar">
+
+    <div class="logo">
+      <img th:src="@{/images/logo.png}" alt="Logo">
+    </div>
+
+    <nav class="menu">
+      <a th:href="@{/}">Inicio</a>
+      <a th:href="@{/conocenos}">Conócenos</a>
+      <a th:href="@{/experiencias}">Experiencias</a>
+      <a th:href="@{/login}">Reservas</a>
+      <a th:href="@{/boutique}">Boutique</a>
+      <a th:href="@{/contacto}">Contacto</a>
+    </nav>
+
+  </div>
+</header>
+
+</body>
+</html>

@@ -11,12 +11,10 @@
   <link rel="stylesheet" th:href="@{/css/style.css}">
 
   <style>
-    /* Fondo propio de esta página */
     body{
       background:#e8ddd2;
     }
 
-    /* Bloque principal */
     .conocenos-section{
       width:90%;
       max-width:1400px;
@@ -26,7 +24,6 @@
       gap:40px;
     }
 
-    /* La imagen ocupa una parte fija */
     .conocenos-image{
       flex:0 0 36%;
     }
@@ -40,7 +37,6 @@
       box-shadow:0 18px 34px rgba(0,0,0,0.08);
     }
 
-    /* El texto ocupa el resto del espacio */
     .conocenos-box{
       flex:1;
       background:rgba(255,255,255,0.78);
@@ -64,7 +60,6 @@
       margin-bottom:16px;
     }
 
-    /* Tarjetas inferiores */
     .conocenos-extra{
       width:90%;
       max-width:1400px;
@@ -97,22 +92,7 @@
 
 <body>
 
-<header>
-  <div class="navbar">
-    <div class="logo">
-      <img th:src="@{/images/logo.png}" alt="Logo">
-    </div>
-
-    <nav class="menu">
-      <a th:href="@{/}">Inicio</a>
-      <a th:href="@{/conocenos}">Conócenos</a>
-      <a th:href="@{/experiencias}">Experiencias</a>
-      <a th:href="@{/login}">Reservas</a>
-      <a th:href="@{/boutique}">Boutique</a>
-      <a th:href="@{/contacto}">Contacto</a>
-    </nav>
-  </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <section class="conocenos-section">
 
@@ -163,12 +143,7 @@
 
 </section>
 
-<footer class="footer">
-  <p>© Coral Pilates Studio</p>
-  <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
-    Instagram
-  </a>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

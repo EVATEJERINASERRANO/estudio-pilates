@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -12,12 +11,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Fondo propio de la home */
         body{
             background:#e8ddd2;
         }
 
-        /* Hero principal de la home */
         .hero{
             width:90%;
             max-width:1400px;
@@ -44,7 +41,6 @@
             opacity:0.6;
         }
 
-        /* Caja flotante del mensaje principal */
         .hero-content{
             position:absolute;
             right:40px;
@@ -58,8 +54,7 @@
             border-radius:25px;
         }
 
-        /* El h1 de esta caja principal va más grande en la home */
-        .hero-content h1{
+        h1{
             font-size:54px;
             margin-bottom:15px;
         }
@@ -68,24 +63,8 @@
 
 <body>
 
-<header>
-    <div class="navbar">
-
-        <div class="logo">
-            <img th:src="@{/images/logo.png}" alt="Logo">
-        </div>
-
-        <nav class="menu">
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/conocenos}">Conócenos</a>
-            <a th:href="@{/experiencias}">Experiencias</a>
-            <a th:href="@{/login}">Reservas</a>
-            <a th:href="@{/boutique}">Boutique</a>
-            <a th:href="@{/contacto}">Contacto</a>
-        </nav>
-
-    </div>
-</header>
+<!-- 🔥 HEADER REUTILIZADO -->
+<div th:replace="fragments/header :: header"></div>
 
 <section class="hero">
     <div class="hero-left" id="heroLeft"></div>
@@ -99,12 +78,8 @@
     </div>
 </section>
 
-<footer class="footer">
-    <p>© Coral Pilates Studio</p>
-    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
-        Instagram
-    </a>
-</footer>
+<!-- 🔥 FOOTER REUTILIZADO -->
+<div th:replace="fragments/footer :: footer"></div>
 
 <script>
     const images = [

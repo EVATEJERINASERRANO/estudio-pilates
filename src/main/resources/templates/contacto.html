@@ -10,12 +10,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <style>
-        /* Fondo propio de esta página */
         body{
             background:#e8ddd2;
         }
 
-        /* Bloque superior con imagen y texto */
         .contact-hero{
             width:90%;
             max-width:1400px;
@@ -73,7 +71,6 @@
             margin-bottom:10px;
         }
 
-        /* Contenido principal con formulario y mapa */
         .contacto-main{
             width:90%;
             max-width:1400px;
@@ -244,22 +241,7 @@
 
 <body>
 
-<header>
-    <div class="navbar">
-        <div class="logo">
-            <img th:src="@{/images/logo.png}" alt="Coral Pilates Studio Logo">
-        </div>
-
-        <nav class="menu">
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/conocenos}">Conócenos</a>
-            <a th:href="@{/experiencias}">Experiencias</a>
-            <a th:href="@{/login}">Reservas</a>
-            <a th:href="@{/boutique}">Boutique</a>
-            <a th:href="@{/contacto}">Contacto</a>
-        </nav>
-    </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <section class="contact-hero">
     <div class="contact-hero-image">
@@ -345,12 +327,7 @@
     </div>
 </section>
 
-<footer class="footer">
-    <p>© Coral Pilates Studio</p>
-    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
-        Instagram
-    </a>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
