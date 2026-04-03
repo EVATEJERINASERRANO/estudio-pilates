@@ -1,8 +1,5 @@
 /* =======================================================
    BASE GENERAL
-   Aquí dejo lo común de toda la web para no repetirlo
-   en cada html. La idea es que esto sea la base visual
-   compartida y luego cada página tenga solo lo suyo.
    ======================================================= */
 
 *{
@@ -14,20 +11,16 @@
 body{
     font-family:'Inter', sans-serif;
     color:#4c4036;
-    margin:0;
 }
 
-/* Los enlaces de la parte pública van sin subrayado */
 a{
     text-decoration:none;
 }
 
-/* Títulos principales con la tipografía elegante */
 h1, h2, h3{
     font-family:'Cormorant Garamond', serif;
 }
 
-/* Botones y elementos de acción con Nunito */
 button,
 .login-link{
     font-family:'Nunito', sans-serif;
@@ -35,9 +28,7 @@ button,
 
 
 /* =======================================================
-   CABECERA PÚBLICA
-   Esto ya coincide con las páginas públicas actuales:
-   index, conocenos, experiencias, contacto y boutique.
+   CABECERA
    ======================================================= */
 
 header{
@@ -60,7 +51,6 @@ header{
     gap:28px;
 }
 
-/* El logo se deja estable para que no cambie raro */
 .logo{
     display:flex;
     align-items:center;
@@ -75,7 +65,6 @@ header{
     filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));
 }
 
-/* Menú principal de navegación */
 .menu{
     display:flex;
     align-items:center;
@@ -115,9 +104,7 @@ header{
 
 
 /* =======================================================
-   FOOTER / PARTE FINAL
-   Esto sirve para dejar igual el copyright y el enlace
-   de Instagram en las páginas públicas.
+   FOOTER
    ======================================================= */
 
 footer{
@@ -146,39 +133,604 @@ footer{
 
 
 /* =======================================================
-   AJUSTES RESPONSIVE COMUNES
-   Esto también se repite bastante en la parte pública,
-   así que ya lo dejo centralizado aquí.
+   HOME (INDEX)
    ======================================================= */
 
-@media (max-width: 1100px){
-    .navbar{
-        padding:16px 0;
-        flex-direction:column;
-        justify-content:center;
-    }
+.home-page{
+    background:#e8ddd2;
+}
 
-    .logo img{
-        height:85px;
+.hero{
+    width:90%;
+    max-width:1400px;
+    height:480px;
+    margin:40px auto;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    background:#cfbeaf;
+}
+
+.hero-left{
+    width:60%;
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-right{
+    width:40%;
+    background-size:cover;
+    background-position:center;
+    filter:blur(3px);
+    opacity:0.6;
+}
+
+.hero-content{
+    position:absolute;
+    right:40px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.box{
+    background:rgba(255,255,255,0.75);
+    padding:40px;
+    border-radius:25px;
+}
+
+.hero h1{
+    font-size:54px;
+    margin-bottom:15px;
+}
+
+
+/* =======================================================
+   CONTACTO
+   ======================================================= */
+
+.contact-page{
+    background:#e8ddd2;
+}
+
+.contact-hero{
+    width:90%;
+    max-width:1400px;
+    margin:26px auto 18px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:24px;
+}
+
+.contact-hero-image{
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 18px 34px rgba(0,0,0,0.07);
+    height:380px;
+}
+
+.contact-hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.contact-hero-copy{
+    background:rgba(255,255,255,0.74);
+    border-radius:30px;
+    padding:30px 32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    box-shadow:0 12px 24px rgba(0,0,0,0.04);
+}
+
+.contact-kicker{
+    font-family:'Nunito',sans-serif;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#9b7c65;
+    margin-bottom:12px;
+}
+
+.contact-hero-copy h1{
+    font-size:52px;
+    margin-bottom:14px;
+}
+
+.contact-hero-copy p{
+    font-size:16px;
+    line-height:1.7;
+}
+
+.contacto-main{
+    width:90%;
+    max-width:1400px;
+    margin:0 auto 34px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+}
+
+.contact-card,
+.map-card{
+    background:rgba(255,255,255,0.72);
+    border-radius:30px;
+    padding:30px;
+    box-shadow:0 12px 24px rgba(0,0,0,0.04);
+}
+
+.section-heading{
+    font-size:42px;
+    margin-bottom:16px;
+}
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.contact-form label{
+    font-weight:700;
+    font-size:15px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:14px;
+    border-radius:18px;
+    border:1px solid #d5c5b6;
+    background:#fffaf6;
+}
+
+.contact-button{
+    padding:14px 26px;
+    border-radius:999px;
+    background:#b9987f;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.info-list{
+    display:grid;
+    gap:12px;
+}
+
+.info-item{
+    background:#fffaf6;
+    border-radius:18px;
+    padding:14px;
+}
+/* =======================================================
+   EXPERIENCIAS
+   ======================================================= */
+
+.experiencias-page{
+    background:#e8ddd2;
+}
+
+.experiencias-section{
+    width:90%;
+    max-width:1400px;
+    margin:50px auto;
+}
+
+.experiencias-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.experiencias-title h1{
+    font-size:64px;
+    color:#4a3a30;
+    margin-bottom:8px;
+}
+
+.experiencias-title p{
+    color:#6b5648;
+    font-size:18px;
+}
+
+.experiencias-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+}
+
+.card{
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,0.08);
+    position:relative;
+    background:#f4ece4;
+    cursor:pointer;
+}
+
+.card-image{
+    width:100%;
+    height:560px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:transform 0.35s ease;
+}
+
+.card:hover img{
+    transform:scale(1.03);
+}
+
+.card-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.28);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:0.3s;
+}
+
+.card:hover .card-overlay{
+    opacity:1;
+}
+
+.card-overlay span{
+    color:white;
+    font-size:30px;
+    text-align:center;
+    padding:0 20px;
+}
+/* =======================================================
+   CONOCENOS
+   ======================================================= */
+
+.conocenos-page{
+    background:#e8ddd2;
+}
+
+.conocenos-section{
+    width:90%;
+    max-width:1400px;
+    margin:45px auto;
+    display:flex;
+    align-items:center;
+    gap:40px;
+}
+
+.conocenos-image{
+    flex:0 0 36%;
+}
+
+.conocenos-image img{
+    width:100%;
+    height:430px;
+    object-fit:cover;
+    border-radius:30px;
+    display:block;
+    box-shadow:0 18px 34px rgba(0,0,0,0.08);
+}
+
+.conocenos-box{
+    flex:1;
+    background:rgba(255,255,255,0.78);
+    padding:48px;
+    border-radius:30px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    min-width:0;
+}
+
+.conocenos-box h1{
+    font-size:62px;
+    margin-bottom:20px;
+    color:#4a3a30;
+}
+
+.conocenos-box p{
+    font-size:17px;
+    line-height:1.8;
+    color:#5b4b40;
+    margin-bottom:16px;
+}
+
+.conocenos-extra{
+    width:90%;
+    max-width:1400px;
+    margin:0 auto 30px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+}
+
+.extra-card{
+    background:rgba(255,255,255,0.62);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.04);
+}
+
+.extra-card h2{
+    font-size:34px;
+    color:#4a3a30;
+    margin-bottom:10px;
+}
+
+.extra-card p{
+    font-size:16px;
+    line-height:1.7;
+    color:#5b4b40;
+}
+/* =======================================================
+   BOUTIQUE
+   ======================================================= */
+
+.boutique-page{
+    background:#e8ddd2;
+}
+
+.boutique-hero{
+    width:90%;
+    max-width:1400px;
+    margin:42px auto 28px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:24px;
+    align-items:stretch;
+}
+
+.hero-image{
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 18px 34px rgba(0,0,0,0.07);
+    min-height:500px;
+    cursor:pointer;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.4s ease;
+}
+
+.hero-image:hover img{
+    transform:scale(1.03);
+}
+
+.hero-copy{
+    background:rgba(255,255,255,0.74);
+    border-radius:30px;
+    padding:44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    box-shadow:0 12px 24px rgba(0,0,0,0.04);
+}
+
+.hero-kicker{
+    font-family:'Nunito',sans-serif;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#9b7c65;
+    margin-bottom:14px;
+}
+
+.hero-copy h1{
+    font-size:64px;
+    line-height:0.95;
+    color:#4a3a30;
+    margin-bottom:18px;
+}
+
+.hero-copy p{
+    font-size:17px;
+    line-height:1.8;
+    color:#5b4b40;
+    margin-bottom:14px;
+}
+
+.swatches{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.swatches .label{
+    font-size:14px;
+    font-weight:600;
+    color:#6b5648;
+    margin-right:4px;
+}
+
+.swatch{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    border:1px solid rgba(0,0,0,0.10);
+    box-shadow:0 2px 4px rgba(0,0,0,0.05);
+}
+
+.swatch-crema{ background:#f1e6db; }
+.swatch-choco{ background:#7b4b38; }
+.swatch-coral{ background:#ddb8ac; }
+.swatch-black{ background:#1f1f1f; }
+.swatch-beige{ background:#d7c2ad; }
+
+.gallery-section{
+    width:90%;
+    max-width:1400px;
+    margin:0 auto 36px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.section-title h2{
+    font-size:52px;
+    color:#4a3a30;
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#6b5648;
+    font-size:17px;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+}
+
+.gallery-card{
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,0.08);
+    cursor:pointer;
+    background:#f4ece4;
+}
+
+.gallery-card img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.35s ease;
+}
+
+.gallery-card:hover img{
+    transform:scale(1.03);
+}
+
+.catalog-section{
+    width:90%;
+    max-width:1100px;
+    margin:0 auto 34px;
+    background:rgba(255,255,255,0.70);
+    border-radius:30px;
+    padding:36px 34px;
+    box-shadow:0 12px 24px rgba(0,0,0,0.04);
+}
+
+.catalog-group{
+    margin-bottom:30px;
+}
+
+.catalog-group:last-child{
+    margin-bottom:0;
+}
+
+.catalog-group h3{
+    font-size:42px;
+    color:#4a3a30;
+    margin-bottom:16px;
+}
+
+.catalog-list{
+    list-style:none;
+    border-top:1px solid rgba(122,95,75,0.16);
+}
+
+.catalog-list li{
+    display:grid;
+    grid-template-columns:1.4fr auto 1fr;
+    gap:20px;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px solid rgba(122,95,75,0.16);
+}
+
+.item-name{
+    font-size:18px;
+    color:#4a3a30;
+    font-weight:600;
+}
+
+.item-price{
+    font-weight:700;
+    color:#8b674f;
+    font-size:17px;
+    white-space:nowrap;
+}
+
+.item-colors{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.image-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.84);
+    z-index:5000;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+}
+
+.image-modal.active{
+    display:flex;
+}
+
+.image-modal img{
+    max-width:90vw;
+    max-height:88vh;
+    object-fit:contain;
+    border-radius:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.35);
+    background:white;
+}
+
+.modal-close{
+    position:absolute;
+    top:22px;
+    right:28px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+    line-height:1;
+}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+
+@media (max-width:1100px){
+    .navbar{
+        flex-direction:column;
     }
 
     .menu{
         justify-content:center;
         margin-left:0;
-        gap:18px;
     }
 
-    .menu a{
-        font-size:17px;
-    }
-}
-
-@media (max-width: 600px){
-    .menu{
-        gap:14px;
+    .contacto-main{
+        grid-template-columns:1fr;
     }
 
-    .menu a{
-        font-size:16px;
+    .contact-hero{
+        grid-template-columns:1fr;
     }
 }

@@ -6,175 +6,16 @@
   <title>Conócenos - Coral Pilates Studio</title>
 
   <th:block th:replace="fragments/head :: head"></th:block>
-
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Inter',sans-serif;
-      background:#e8ddd2;
-      color:#4c4036;
-    }
-
-    a{
-      text-decoration:none;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:#eee2d7;
-      border-bottom:1px solid #d5c5b6;
-      box-shadow:0 3px 10px rgba(0,0,0,0.03);
-    }
-
-    .navbar{
-      width:95%;
-      max-width:1500px;
-      margin:auto;
-      min-height:110px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:28px;
-    }
-
-    .logo img{
-      height:95px;
-    }
-
-    .menu{
-      display:flex;
-      align-items:center;
-      gap:28px;
-      margin-left:auto;
-    }
-
-    .menu a{
-      font-family:'Nunito',sans-serif;
-      font-size:19px;
-      font-weight:700;
-      color:#6f5441;
-    }
-
-    /* ============================= */
-    /* CONÓCENOS (ARREGLADO) */
-    /* ============================= */
-
-    .conocenos-section{
-      width:90%;
-      max-width:1400px;
-      margin:45px auto;
-      display:flex;
-      align-items:center;
-      gap:40px;
-    }
-
-    .conocenos-image{
-      flex:0 0 36%;
-    }
-
-    .conocenos-image img{
-      width:100%;
-      height:430px;
-      object-fit:cover;
-      border-radius:30px;
-      display:block;
-      box-shadow:0 18px 34px rgba(0,0,0,0.08);
-    }
-
-    .conocenos-box{
-      flex:1;
-      background:rgba(255,255,255,0.78);
-      padding:48px;
-      border-radius:30px;
-      backdrop-filter:blur(6px);
-      box-shadow:0 10px 25px rgba(0,0,0,0.05);
-      min-width:0;
-    }
-
-    .conocenos-box h1{
-      font-family:'Cormorant Garamond',serif;
-      font-size:62px;
-      margin-bottom:20px;
-      color:#4a3a30;
-    }
-
-    .conocenos-box p{
-      font-size:17px;
-      line-height:1.8;
-      color:#5b4b40;
-      margin-bottom:16px;
-    }
-
-    .conocenos-extra{
-      width:90%;
-      max-width:1400px;
-      margin:0 auto 30px;
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:24px;
-    }
-
-    .extra-card{
-      background:rgba(255,255,255,0.62);
-      border-radius:24px;
-      padding:28px;
-      box-shadow:0 8px 18px rgba(0,0,0,0.04);
-    }
-
-    .extra-card h2{
-      font-family:'Cormorant Garamond',serif;
-      font-size:34px;
-      color:#4a3a30;
-      margin-bottom:10px;
-    }
-
-    footer{
-      background:#dac9ba;
-      padding:25px;
-      text-align:center;
-      margin-top:20px;
-    }
-
-    .instagram-link{
-      color:#7a5f4b;
-      margin-top:10px;
-      display:inline-block;
-      font-weight:600;
-    }
-
-  </style>
 </head>
 
-<body>
+<body class="conocenos-page">
 
-<header>
-  <div class="navbar">
-    <div class="logo">
-      <img th:src="@{/images/logo.png}" alt="Logo">
-    </div>
-
-    <nav class="menu">
-      <a th:href="@{/}">Inicio</a>
-      <a th:href="@{/conocenos}">Conócenos</a>
-      <a th:href="@{/experiencias}">Experiencias</a>
-      <a th:href="@{/login}">Reservas</a>
-      <a th:href="@{/boutique}">Boutique</a>
-      <a th:href="@{/contacto}">Contacto</a>
-    </nav>
-  </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <section class="conocenos-section">
 
   <div class="conocenos-image">
-    <img th:src="@{/images/estudio.png}">
+    <img th:src="@{/images/estudio.png}" alt="Nuestro estudio">
   </div>
 
   <div class="conocenos-box">
@@ -220,12 +61,7 @@
 
 </section>
 
-<footer>
-  <p>© Coral Pilates Studio</p>
-  <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
-    Instagram
-  </a>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

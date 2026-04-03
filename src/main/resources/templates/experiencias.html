@@ -4,94 +4,9 @@
     <title>Experiencias - Coral Pilates Studio</title>
 
     <th:block th:replace="fragments/head :: head"></th:block>
-
-    <style>
-        body{
-            background:#e8ddd2;
-        }
-
-        .experiencias-section{
-            width:90%;
-            max-width:1400px;
-            margin:50px auto;
-        }
-
-        .experiencias-title{
-            text-align:center;
-            margin-bottom:30px;
-        }
-
-        .experiencias-title h1{
-            font-size:64px;
-            color:#4a3a30;
-            margin-bottom:8px;
-        }
-
-        .experiencias-title p{
-            color:#6b5648;
-            font-size:18px;
-        }
-
-        .experiencias-grid{
-            display:grid;
-            grid-template-columns:repeat(3, 1fr);
-            gap:25px;
-        }
-
-        .card{
-            border-radius:30px;
-            overflow:hidden;
-            box-shadow:0 15px 30px rgba(0,0,0,0.08);
-            position:relative;
-            background:#f4ece4;
-            cursor:pointer;
-        }
-
-        .card-image{
-            width:100%;
-            height:560px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            padding:10px;
-        }
-
-        .card img{
-            width:100%;
-            height:100%;
-            object-fit:contain;
-            transition:transform 0.35s ease;
-        }
-
-        .card:hover img{
-            transform:scale(1.03);
-        }
-
-        .card-overlay{
-            position:absolute;
-            inset:0;
-            background:rgba(0,0,0,0.28);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            opacity:0;
-            transition:0.3s;
-        }
-
-        .card:hover .card-overlay{
-            opacity:1;
-        }
-
-        .card-overlay span{
-            color:white;
-            font-size:30px;
-            text-align:center;
-            padding:0 20px;
-        }
-    </style>
 </head>
 
-<body>
+<body class="experiencias-page">
 
 <div th:replace="fragments/header :: header"></div>
 
@@ -131,7 +46,6 @@
             </div>
             <div class="card-overlay"><span>Relax Serenity</span></div>
         </div>
-
         <div class="card" onclick="openModal('/images/exp5.png')">
             <div class="card-image">
                 <img th:src="@{/images/exp5.png}" alt="Experiencia Brunch Glow">
@@ -150,7 +64,12 @@
 
 </section>
 
-<div th:replace="fragments/footer :: footer"></div>
+<footer class="footer">
+    <p>© Coral Pilates Studio</p>
+    <a class="instagram-link" href="https://www.instagram.com/coral.pilatestudio/" target="_blank">
+        Instagram
+    </a>
+</footer>
 
 </body>
 </html>
