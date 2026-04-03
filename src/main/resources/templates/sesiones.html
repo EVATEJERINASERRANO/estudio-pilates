@@ -76,6 +76,27 @@
             max-width:720px;
         }
 
+        .materials-link{
+            display:inline-block;
+            margin-top:20px;
+            padding:12px 18px;
+            border-radius:999px;
+            background:#b9987f;
+            color:#fffaf5;
+            text-decoration:none;
+            font-family:'Nunito',sans-serif;
+            font-size:14px;
+            font-weight:800;
+            box-shadow:0 8px 18px rgba(185,152,127,0.25);
+            transition:background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .materials-link:hover{
+            background:#a9866d;
+            transform:translateY(-1px);
+            box-shadow:0 10px 20px rgba(169,134,109,0.28);
+        }
+
         .user-box{
             background:rgba(255,250,246,0.95);
             border:1px solid rgba(178,142,115,0.18);
@@ -480,6 +501,10 @@
                     Consulta las sesiones organizadas por día, identifica rápidamente qué horarios tienen plazas
                     disponibles y revisa también las reservas que ya has confirmado.
                 </p>
+
+                <a th:href="@{/materiales}" class="materials-link">
+                    Ver materiales
+                </a>
             </div>
 
             <div class="user-box">

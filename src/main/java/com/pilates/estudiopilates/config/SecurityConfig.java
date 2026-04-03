@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 "/images/**"
                         ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/sesiones-web", "/reservas/**").hasRole("CLIENTE")
+                        .requestMatchers("/sesiones-web", "/materiales", "/reservas/**").hasRole("CLIENTE")
                         .requestMatchers("/clases/**", "/sesiones/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -58,7 +58,7 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .successHandler((request, response, authentication) -> {
                             boolean esAdmin = authentication.getAuthorities().stream()
-                                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+                                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
                             if (esAdmin) {
                                 response.sendRedirect("/admin");
