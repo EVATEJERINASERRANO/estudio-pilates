@@ -2,6 +2,7 @@ package com.pilates.estudiopilates.controller;
 
 import com.pilates.estudiopilates.model.Reserva;
 import com.pilates.estudiopilates.model.Sesion;
+import com.pilates.estudiopilates.repository.MaterialRepository;
 import com.pilates.estudiopilates.repository.ReservaService;
 import com.pilates.estudiopilates.service.SesionService;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -23,10 +19,14 @@ public class WebController {
 
     private final SesionService sesionService;
     private final ReservaService reservaService;
+    private final MaterialRepository materialRepository;
 
-    public WebController(SesionService sesionService, ReservaService reservaService) {
+    public WebController(SesionService sesionService,
+                         ReservaService reservaService,
+                         MaterialRepository materialRepository) {
         this.sesionService = sesionService;
         this.reservaService = reservaService;
+        this.materialRepository = materialRepository;
     }
 
     @GetMapping("/conocenos")
@@ -36,6 +36,7 @@ public class WebController {
 
     @GetMapping("/sesiones-web")
     public String sesionesWeb(Model model, Principal principal) {
+
         List<Sesion> sesiones = sesionService.obtenerTodas();
 
         Map<LocalDate, List<Sesion>> sesionesPorDia = sesiones.stream()
@@ -72,6 +73,7 @@ public class WebController {
 
     @GetMapping("/admin/sesiones")
     public String adminSesiones(Model model) {
+
         List<Sesion> sesiones = sesionService.obtenerTodas();
         List<Reserva> reservas = reservaService.obtenerTodas();
 
@@ -118,5 +120,12 @@ public class WebController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    // 🔥 NUEVO
+    @GetMapping("/materiales")
+    public String materiales(Model model) {
+        model.addAttribute("materiales", materialRepository.findAll());
+        return "materiales";
     }
 }

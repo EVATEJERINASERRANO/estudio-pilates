@@ -140,6 +140,13 @@
             margin-bottom:18px;
         }
 
+        .buttons-row{
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+            margin-top:20px;
+        }
+
         .admin-link{
             display:inline-block;
             padding:12px 18px;
@@ -149,6 +156,7 @@
             text-decoration:none;
             font-family:'Nunito',sans-serif;
             font-weight:700;
+            font-size:14px;
         }
 
         @media (max-width: 768px){
@@ -165,6 +173,9 @@
 <body>
 
 <div class="page-wrap">
+    <div th:if="${mensajeOk}" style="margin-bottom:18px; padding:14px 18px; border-radius:16px; font-size:14px; font-weight:700; background:#e8f3ea; color:#315c38; border:1px solid #cfe4d2;">
+        <span th:text="${mensajeOk}"></span>
+    </div>
 
     <section class="top-card">
         <div class="top-row">
@@ -173,8 +184,14 @@
                 <h1>Panel de administración</h1>
                 <p class="intro">
                     Desde aquí podrás revisar de forma clara qué sesiones hay cada día, cuántas plazas quedan
-                    y qué personas están apuntadas en cada una.
+                    y qué personas están apuntadas en cada una, además de gestionar clientes y materiales.
                 </p>
+
+                <div class="buttons-row">
+                    <a th:href="@{/admin/sesiones}" class="admin-link">Ver agenda admin</a>
+                    <a th:href="@{/admin/usuarios/nuevo}" class="admin-link">Crear cliente</a>
+                    <a th:href="@{/admin/materiales}" class="admin-link">Materiales / vídeos</a>
+                </div>
             </div>
 
             <div class="user-box">
@@ -193,11 +210,11 @@
 
     <section class="cards">
         <article class="admin-card">
-            <h2>Agenda admin</h2>
+            <h2>Zona de gestión</h2>
             <p>
-                Vista unificada por días y sesiones, con asistentes, plazas disponibles y control más claro.
+                Utiliza los accesos superiores para gestionar la agenda del estudio, crear nuevos clientes
+                y preparar materiales audiovisuales para compartir con ellos.
             </p>
-            <a th:href="@{/admin/sesiones}" class="admin-link">Ver agenda admin</a>
         </article>
     </section>
 
