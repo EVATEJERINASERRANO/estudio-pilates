@@ -38,6 +38,10 @@
             font-weight:700;
         }
 
+        .back-link:hover{
+            color:#5d4637;
+        }
+
         .head-card{
             background:rgba(255,255,255,0.84);
             border:1px solid rgba(191,160,133,0.18);
@@ -91,6 +95,13 @@
             font-size:14px;
             font-weight:800;
             white-space:nowrap;
+            box-shadow:0 10px 20px rgba(185,152,127,0.22);
+            transition:all 0.2s ease;
+        }
+
+        .new-session-button:hover{
+            background:#a8866d;
+            transform:translateY(-1px);
         }
 
         .alert{
@@ -149,15 +160,28 @@
 
         .session-card{
             background:linear-gradient(180deg, #fffdfb 0%, #fdf7f2 100%);
-            border:1px solid #eaded3;
+            border:1px solid #e2d4c8;
             border-radius:24px;
             padding:20px;
-            box-shadow:0 10px 20px rgba(89,66,49,0.05);
+            box-shadow:0 12px 24px rgba(89,66,49,0.06);
+            transition:transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+
+        .session-card:hover{
+            transform:translateY(-2px);
+            box-shadow:0 16px 28px rgba(89,66,49,0.08);
+        }
+
+        .session-card.completa{
+            background:linear-gradient(180deg, #f8f1eb 0%, #f0e2d7 100%);
+            border:1px solid #6a4a3d;
+            box-shadow:0 14px 26px rgba(86,58,45,0.12);
         }
 
         .session-card.cancelada{
-            border:1px solid #d4a8a0;
-            background:linear-gradient(180deg, #fff8f7 0%, #fbeceb 100%);
+            border:1px solid #cf8f86;
+            background:linear-gradient(180deg, #fff4f3 0%, #f8e2de 100%);
+            box-shadow:0 14px 26px rgba(170,98,88,0.10);
         }
 
         .session-top{
@@ -176,11 +200,27 @@
             line-height:1;
         }
 
+        .session-card.completa .session-hour{
+            color:#4a2f25;
+        }
+
+        .session-card.cancelada .session-hour{
+            color:#7d4038;
+        }
+
         .session-class{
             font-size:14px;
             color:#7f6451;
             margin-top:6px;
             font-weight:600;
+        }
+
+        .session-card.completa .session-class{
+            color:#63473b;
+        }
+
+        .session-card.cancelada .session-class{
+            color:#8e584f;
         }
 
         .session-badge{
@@ -191,11 +231,19 @@
             font-size:12px;
             font-weight:800;
             white-space:nowrap;
+            border:1px solid rgba(90,69,55,0.06);
+        }
+
+        .session-badge.completa{
+            background:#5d3d31;
+            color:#fffaf5;
+            border:1px solid #5d3d31;
         }
 
         .session-badge.cancelada{
-            background:#d78f86;
+            background:#d07d73;
             color:#fffaf5;
+            border:1px solid #d07d73;
         }
 
         .session-meta{
@@ -207,9 +255,19 @@
 
         .meta-box{
             background:#fffaf6;
-            border:1px solid #eaded3;
+            border:1px solid #e3d5c9;
             border-radius:16px;
             padding:12px;
+        }
+
+        .session-card.completa .meta-box{
+            background:#f6ede6;
+            border:1px solid #cdb5a3;
+        }
+
+        .session-card.cancelada .meta-box{
+            background:#fff8f7;
+            border:1px solid #e4c1bb;
         }
 
         .meta-label{
@@ -221,10 +279,26 @@
             font-weight:700;
         }
 
+        .session-card.completa .meta-label{
+            color:#6c4e42;
+        }
+
+        .session-card.cancelada .meta-label{
+            color:#9a5b52;
+        }
+
         .meta-value{
-            font-size:18px;
+            font-size:22px;
             font-weight:800;
             color:#4d3c30;
+        }
+
+        .session-card.completa .meta-value{
+            color:#4a2f25;
+        }
+
+        .session-card.cancelada .meta-value{
+            color:#8a453b;
         }
 
         .session-actions{
@@ -246,6 +320,7 @@
             font-weight:800;
             border:none;
             cursor:pointer;
+            transition:all 0.2s ease;
         }
 
         .edit-button{
@@ -253,21 +328,33 @@
             color:#5a4537;
         }
 
+        .edit-button:hover{
+            background:#decebf;
+        }
+
         .delete-button{
             background:#5a4537;
             color:#fffaf5;
         }
 
+        .delete-button:hover{
+            background:#463428;
+        }
+
         .cancel-button{
-            background:#c97f75;
+            background:#cf7d73;
             color:#fffaf5;
+        }
+
+        .cancel-button:hover{
+            background:#bc6c63;
         }
 
         .cancelled-message{
             margin-bottom:16px;
-            background:#f8e8e5;
-            color:#9c3f33;
-            border:1px solid #efc8c2;
+            background:#f7deda;
+            color:#9a3f34;
+            border:1px solid #e7b3ab;
             border-radius:16px;
             padding:12px 14px;
             font-size:14px;
@@ -284,6 +371,14 @@
             letter-spacing:0.7px;
         }
 
+        .session-card.completa .attendees-title{
+            color:#5a4034;
+        }
+
+        .session-card.cancelada .attendees-title{
+            color:#865047;
+        }
+
         .attendees-empty{
             background:#fffaf6;
             border:1px dashed #dbcbbb;
@@ -291,6 +386,18 @@
             padding:14px;
             color:#8a6b55;
             font-size:14px;
+        }
+
+        .session-card.completa .attendees-empty{
+            background:#fbf4ef;
+            border:1px dashed #bfa28f;
+            color:#6b4d40;
+        }
+
+        .session-card.cancelada .attendees-empty{
+            background:#fff9f8;
+            border:1px dashed #d8a39b;
+            color:#9a6057;
         }
 
         .attendees-list{
@@ -304,6 +411,16 @@
             border:1px solid rgba(122,90,68,0.10);
             border-radius:16px;
             padding:12px 14px;
+        }
+
+        .session-card.completa .attendee-item{
+            background:#e8d6c9;
+            border:1px solid rgba(90,69,55,0.14);
+        }
+
+        .session-card.cancelada .attendee-item{
+            background:#f2dfdb;
+            border:1px solid rgba(170,98,88,0.12);
         }
 
         .attendee-name{
@@ -391,7 +508,7 @@
 
                 <div th:each="sesion : ${entry.value}"
                      class="session-card"
-                     th:classappend="${sesion.cancelada} ? ' cancelada' : ''">
+                     th:classappend="${sesion.cancelada} ? ' cancelada' : (${sesion.plazasDisponibles == 0} ? ' completa' : '')">
 
                     <div class="session-top">
                         <div>
@@ -406,8 +523,8 @@
                         </div>
 
                         <div class="session-badge"
-                             th:classappend="${sesion.cancelada} ? ' cancelada' : ''"
-                             th:text="${sesion.cancelada ? 'Cancelada' : 'Sesión'}">
+                             th:classappend="${sesion.cancelada} ? ' cancelada' : (${sesion.plazasDisponibles == 0} ? ' completa' : '')"
+                             th:text="${sesion.cancelada ? 'Cancelada' : (sesion.plazasDisponibles == 0 ? 'Completa' : 'Sesión')}">
                             Sesión
                         </div>
                     </div>
