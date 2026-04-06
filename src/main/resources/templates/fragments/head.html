@@ -1,23 +1,9 @@
-<!--
-    Fragmento común del HEAD
-    Aquí meto todo lo que se repite en todas las páginas:
-    - meta básicos
-    - fuentes
-    - css general
-
-    Así no tengo que copiarlo en cada html
--->
-
-<head th:fragment="head">
-
-    <!-- Configuración básica -->
+<th:block th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Fuentes del proyecto -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- CSS global -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
-</head>
+    <link rel="stylesheet" th:href="@{/css/private.css}">
+</th:block>

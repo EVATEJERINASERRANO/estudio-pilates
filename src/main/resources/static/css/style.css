@@ -715,27 +715,3 @@ footer{
     cursor:pointer;
     line-height:1;
 }
-
-
-/* =======================================================
-   RESPONSIVE
-   ======================================================= */
-
-@media (max-width:1100px){
-    .navbar{
-        flex-direction:column;
-    }
-
-    .menu{
-        justify-content:center;
-        margin-left:0;
-    }
-
-    .contacto-main{
-        grid-template-columns:1fr;
-    }
-
-    .contact-hero{
-        grid-template-columns:1fr;
-    }
-}
