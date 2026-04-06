@@ -21,13 +21,15 @@
                 <h1>Panel de administración</h1>
                 <p class="intro">
                     Desde aquí podrás revisar de forma clara qué sesiones hay cada día, cuántas plazas quedan
-                    y qué personas están apuntadas en cada una, además de gestionar clientes y materiales.
+                    y qué personas están apuntadas en cada una, además de gestionar clientes, materiales
+                    y los mensajes recibidos desde la web.
                 </p>
 
                 <div class="buttons-row">
                     <a th:href="@{/admin/sesiones}" class="admin-link">Ver agenda admin</a>
                     <a th:href="@{/admin/usuarios/nuevo}" class="admin-link">Crear cliente</a>
                     <a th:href="@{/admin/materiales}" class="admin-link">Materiales / vídeos</a>
+                    <a th:href="@{/admin/mensajes}" class="admin-link">Mensajes</a>
                 </div>
             </div>
 
@@ -49,8 +51,8 @@
         <article class="admin-card">
             <h2>Zona de gestión</h2>
             <p>
-                Utiliza los accesos superiores para gestionar la agenda del estudio, crear nuevos clientes
-                y preparar materiales audiovisuales para compartir con ellos.
+                Utiliza los accesos superiores para gestionar la agenda del estudio, crear nuevos clientes,
+                preparar materiales audiovisuales y revisar los mensajes enviados por los usuarios desde la web.
             </p>
         </article>
     </section>

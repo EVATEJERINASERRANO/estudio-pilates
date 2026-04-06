@@ -1731,6 +1731,134 @@
     text-decoration:none;
 }
 /* =======================================================
+   ADMIN MENSAJES
+   ======================================================= */
+
+.admin-mensajes-page{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top left, rgba(255,248,242,0.95), rgba(245,238,232,1) 45%),
+        linear-gradient(180deg, #f7f1eb 0%, #efe5dc 100%);
+    padding:30px 20px;
+    font-family:'Inter',sans-serif;
+    color:#4c4036;
+}
+
+.admin-mensajes-page .page-wrap{
+    width:92%;
+    max-width:1000px;
+    margin:0 auto;
+}
+
+.admin-mensajes-page h1{
+    font-size:48px;
+    margin-bottom:24px;
+    color:#4a3a30;
+}
+
+.admin-mensajes-page .back-link{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#7b604c;
+    font-weight:700;
+}
+
+.empty-box{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    color:#7b604c;
+    box-shadow:0 6px 14px rgba(0,0,0,0.05);
+}
+
+.mensajes-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.mensaje-card{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.06);
+}
+
+.mensaje-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.mensaje-nombre{
+    font-weight:800;
+    font-size:18px;
+}
+
+.mensaje-email{
+    font-size:14px;
+    color:#7b604c;
+}
+
+.mensaje-fecha{
+    font-size:13px;
+    color:#9b7c65;
+}
+
+.mensaje-telefono{
+    font-size:14px;
+    margin-bottom:8px;
+    color:#5a4537;
+}
+
+.mensaje-texto{
+    font-size:15px;
+    line-height:1.6;
+}
+.mensaje-no-leido{
+    border:2px solid #b9987f;
+    background:#fffaf6;
+}
+.mensajes-section{
+    margin-top:24px;
+}
+
+.mensajes-section-read{
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid rgba(155,124,101,0.25);
+}
+
+.mensaje-section-title{
+    font-size:22px;
+    margin-bottom:14px;
+    color:#5a4537;
+    font-weight:800;
+}
+
+.mensaje-no-leido{
+    border:2px solid #b9987f;
+    background:#fffaf6;
+}
+
+.mensaje-action{
+    margin-top:12px;
+}
+
+.marcar-leido-btn{
+    padding:8px 14px;
+    border:none;
+    border-radius:999px;
+    background:#b9987f;
+    color:#fffaf5;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+/* =======================================================
    RESPONSIVE
    ======================================================= */
 
@@ -1882,5 +2010,14 @@
 
         .admin-usuario-form-card h1{
             font-size:32px;
+        }
+
+        .admin-mensajes-page h1{
+            font-size:36px;
+        }
+
+        .mensaje-top{
+            flex-direction:column;
+            align-items:flex-start;
         }
 }

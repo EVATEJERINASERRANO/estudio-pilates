@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Mensajes - Coral Pilates Studio</title>
+  <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body class="admin-mensajes-page">
+
+<div class="page-wrap">
+
+  <a th:href="@{/admin}" class="back-link">← Volver al admin</a>
+
+  <h1>Mensajes de contacto</h1>
+
+  <section class="mensajes-section">
+    <h2 class="mensaje-section-title">No leídos</h2>
+
+    <div th:if="${#lists.isEmpty(noLeidos)}" class="empty-box">
+      No hay mensajes nuevos que mostrar.
+    </div>
+
+    <div class="mensajes-list" th:if="${!#lists.isEmpty(noLeidos)}">
+      <div th:each="m : ${noLeidos}" class="mensaje-card mensaje-no-leido">
+
+        <div class="mensaje-top">
+          <div>
+            <div class="mensaje-nombre" th:text="${m.nombre}">Nombre</div>
+            <div class="mensaje-email" th:text="${m.email}">email@email.com</div>
+          </div>
+
+          <div class="mensaje-fecha"
+               th:text="${#temporals.format(m.fechaEnvio, 'dd/MM/yyyy HH:mm')}">
+            fecha
+          </div>
+        </div>
+
+        <div class="mensaje-telefono" th:if="${m.telefono != null and !#strings.isEmpty(m.telefono)}">
+          Tel: <span th:text="${m.telefono}"></span>
+        </div>
+
+        <div class="mensaje-texto" th:text="${m.mensaje}">
+          Mensaje
+        </div>
+
+        <form th:action="@{/admin/mensajes/marcar-leido}" method="post" class="mensaje-action">
+          <input type="hidden" name="id" th:value="${m.id}">
+          <button type="submit" class="marcar-leido-btn">Marcar como leído</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="mensajes-section mensajes-section-read">
+    <h2 class="mensaje-section-title">Mensajes leídos</h2>
+
+    <div th:if="${#lists.isEmpty(leidos)}" class="empty-box">
+      No hay mensajes leídos todavía.
+    </div>
+
+    <div class="mensajes-list" th:if="${!#lists.isEmpty(leidos)}">
+      <div th:each="m : ${leidos}" class="mensaje-card">
+
+        <div class="mensaje-top">
+          <div>
+            <div class="mensaje-nombre" th:text="${m.nombre}">Nombre</div>
+            <div class="mensaje-email" th:text="${m.email}">email@email.com</div>
+          </div>
+
+          <div class="mensaje-fecha"
+               th:text="${#temporals.format(m.fechaEnvio, 'dd/MM/yyyy HH:mm')}">
+            fecha
+          </div>
+        </div>
+
+        <div class="mensaje-telefono" th:if="${m.telefono != null and !#strings.isEmpty(m.telefono)}">
+          Tel: <span th:text="${m.telefono}"></span>
+        </div>
+
+        <div class="mensaje-texto" th:text="${m.mensaje}">
+          Mensaje
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

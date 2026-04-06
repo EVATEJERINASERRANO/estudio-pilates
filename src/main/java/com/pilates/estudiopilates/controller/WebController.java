@@ -112,17 +112,11 @@ public class WebController {
         return "boutique";
     }
 
-    @GetMapping("/contacto")
-    public String contacto() {
-        return "contacto";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    // 🔥 NUEVO
     @GetMapping("/materiales")
     public String materiales(Model model) {
         model.addAttribute("materiales", materialRepository.findAll());
